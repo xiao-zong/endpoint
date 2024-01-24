@@ -1,0 +1,2326 @@
+%
+% Bernoulli
+% Journal of Complexity 
+% 
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+%\usepackage{newtxmath}
+
+% \usepackage[utf8]{inputenc}
+
+% \usepackage[LGR,T1]{fontenc}
+% \usepackage{selinput} % Auto-detect input encoding.
+\usepackage{textalpha} % Enable Greek text
+% \usepackage[greek,english]{babel}
+
+% \SelectInputEncodingList{utf8, iso-8859-7}
+% \SelectInputMappings{alpha=α}
+% \SelectInputMappings{lambda=λ}
+
+\usepackage{bm}
+\usepackage{enumerate} 
+\usepackage{amssymb,amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{accents} 
+
+\usepackage{dsfont}
+
+\usepackage{stackengine}
+
+\usepackage{accents} 
+
+\let\Horig\H
+
+\usepackage{tikz}
+\usetikzlibrary{automata,topaths}
+\usetikzlibrary{shapes}
+\usetikzlibrary{plotmarks}
+ 
+% \usepackage{wasysym} 
+\usepackage{float} 
+\usepackage{textcomp} 
+\usepackage{siunitx}
+\sisetup{output-exponent-marker=\ensuremath{\mathrm{e}}}
+
+\usepackage{color} 
+\definecolor{lightblue}{rgb}{0,0.2,0.5}
+\usepackage[colorlinks=true, urlcolor=lightblue,linkcolor=lightblue, citecolor=lightblue]{hyperref}
+\usepackage{ucs}
+%% For typesetting code listings                                                
+
+% \usepackage{listings}
+\usepackage{listingsutf8}
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={False,sage,True},sensitive=true}
+
+\lstset{
+ mathescape = false,
+ escapechar = {$},
+ basicstyle = \ttfamily,
+ extendedchars=false,
+ inputencoding=utf8,
+%  frame=none,
+%  showtabs=False,
+%  showspaces=False,
+%  showstringspaces=False,
+  commentstyle={\ttfamily\color{dgreencolor}},
+  keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+  stringstyle={\ttfamily\color{dgraycolor}\bfseries},
+  language=Sage,
+  basicstyle={\fontsize{10pt}{10pt}\ttfamily},
+  aboveskip=0.3em,
+  belowskip=0.1em,
+  numbers=none, % left,
+  numberstyle=\footnotesize,
+  breaklines=true,                % sets automatic line breaking 
+}
+
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{0.01,0.02,0.7}
+\definecolor{dgreencolor}{rgb}{0.2,0.4,0.0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\newcommand{\dblue}{\color{dbluecolor}\bf}
+\newcommand{\dred}{\color{dredcolor}\bf}
+\newcommand{\dblack}{\color{dblackcolor}\bf}
+
+\usepackage{graphicx}
+\usepackage{flushend,cuted}
+\usepackage{bm}
+\usepackage{tabularx}
+%\usepackage{color}
+\usepackage{indentfirst}
+\usepackage{amssymb}
+\usepackage{xparse}
+\usepackage{tikz}
+\usepackage{mdwlist}
+\usepackage{tkz-graph}
+
+\DeclareMathAlphabet{\eufrak}{U}{}{}{} 
+\SetMathAlphabet\eufrak{normal}{U}{euf}{m}{n}
+\SetMathAlphabet\eufrak{bold}{U}{euf}{b}{n}
+
+
+% \usepackage{eucal}
+
+% \usepackage{epsfig,latexsym}
+
+% \usepackage{graphicx,amsmath,amssymb,latexsym,psfrag}
+
+% \usepackage[polish]{babel}
+
+\newtheorem{assumption}{Assumption}[section]
+
+% \usepackage{graphics,graphicx,amsmath}
+
+\oddsidemargin=0cm \textwidth=16.5cm \textheight=23cm
+\topmargin=-1.5cm
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\IP}{\mathbb{P}}
+%\newcommand{\bone}{\bone}
+\newcommand{\bone}{{\bf 1}}
+% \newcommand{\E}{\mathrm{E}}
+
+\newcommand{\supp}{\mathrm{supp}}
+
+%% \renewcommand{\le}{\leqslant}
+%% \renewcommand{\leq}{\leqslant}
+
+%% \renewcommand{\ge}{\geqslant}
+%% \renewcommand{\geq}{\geqslant}
+
+\newcommand{\conv}{\mathrm{conv}}
+\newcommand{\card}{\mathrm{card}}
+\newcommand{\grad}{\mathrm{grad}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\inte}{\mathbb{N}}
+\newcommand{\bbf}{{\mathbf{f}}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\TP}{\widetilde{P}}
+\newcommand{\tgi}{t\rightarrow \infty}
+\newcommand{\ngi}{n\rightarrow \infty}
+\newcommand{\algi}{\alpha \rightarrow \infty}
+\newcommand{\xgi}{x\rightarrow \infty}
+\newcommand{\oJ}{\overline{J}}
+\newcommand{\og}{\overline{\gamma}}
+\newcommand{\oL}{\overline{\Lambda}}
+\newcommand{\EPSI}{\varepsilon}
+
+% To define \widebar
+\makeatletter
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\newcommand*\widebar[1]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+    \rel@kern{0.8}%
+    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
+    \rel@kern{-0.2}%
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+  \macc@nested@a\relax111{#1}%
+  \endgroup
+}
+\makeatother
+
+\makeatletter
+\DeclareRobustCommand\widecheck[1]{{\mathpalette\@widecheck{#1}}}
+\def\@widecheck#1#2{%
+    \setbox\z@\hbox{\m@th$#1#2$}%
+    \setbox\tw@\hbox{\m@th$#1%
+       \widehat{%
+          \vrule\@width\z@\@height\ht\z@
+          \vrule\@height\z@\@width\wd\z@}$}%
+    \dp\tw@-\ht\z@
+    \@tempdima\ht\z@ \advance\@tempdima2\ht\tw@ \divide\@tempdima\thr@@
+    \setbox\tw@\hbox{%
+       \raise\@tempdima\hbox{\scalebox{1}[-1]{\lower\@tempdima\box
+\tw@}}}%
+    {\ooalign{\box\tw@ \cr \box\z@}}}
+\makeatother
+
+\newcommand{\disc}{\mathrm{disc}}
+\newcommand{\bZ}{\bold{Z}}
+\newcommand{\bz}{\bold{z}}
+\newcommand{\dtv}{{d_{\rm TV}}}
+\newcommand{\dk}{{d_{\rm K}}}
+\newcommand{\dw}{{d_{\rm W}}}
+
+
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}[prop]{Lemma}
+\newtheorem{definition}[prop]{Definition}
+\newtheorem{corollary}[prop]{Corollary}
+\newtheorem{thm}[prop]{Theorem}
+\newtheorem{remark}[prop]{Remark}
+\newtheorem{example}[prop]{Example}
+
+%\def\bone{\vmathbb{1}}
+\def\bp{\noindent{\it Proof.}\ }
+\def\ep{\hfill $\Box$}
+\newcommand{\bt}{\mathbf{t}}
+\def\({\left(}
+\def\){\right)}
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definicja}[section]
+\newcommand{\cov}{\mathrm{Cov}}
+\def\[{\left[}
+\def\]{\right]}
+\def\real{{\mathord{\mathbb R}}}
+\def\N{{\mathord{\mathbb N}}}
+\def\Dom{\mathrm{Dom}}
+\def\Var{\mathrm{Var}}
+% \newcommand{\p}{\mathbb{P}}
+\newcommand{\pr}{\mathbb{P}}
+\def\P{\mathbb{P}}
+% \newcommand{\R}{\mathbb{R}}
+%\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+% \newcommand{\C}{\mathbb{C}}
+% \newcommand{\E}{\mathbb{E}}
+\newcommand{\re}{\mathbb{e}}
+
+\newenvironment{Proof}{\removelastskip\par\medskip
+\noindent{\em Proof.} \rm}{\penalty-20\null\hfill$\square$\par\medbreak}
+
+\newenvironment{Proofx}{\removelastskip\par\medskip
+\noindent{\em Proof.} \rm}{\par}
+
+\newenvironment{Proofy}{\removelastskip\par\medskip
+\noindent{\em Proof} \rm}{\penalty-20\null\hfill$\square$\par\medbreak}
+
+\allowdisplaybreaks
+
+\numberwithin{equation}{section}
+
+% \usepackage{refcheck}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% for drawing pictures by tikz
+\GraphInit[vstyle = Shade]
+\usetikzlibrary[intersections,
+positioning,
+petri,
+backgrounds,
+fit,
+decorations.pathmorphing,
+arrows,
+arrows.meta,
+bending,
+calc,
+intersections,
+through,
+backgrounds,
+shapes.geometric,
+quotes,
+matrix,
+trees,
+shapes.symbols,
+graphs,
+math,
+patterns,
+external,
+scopes,
+matrix,
+lindenmayersystems,
+shapes.callouts,
+shapes.misc,
+angles,
+shapes.arrows,
+shadings]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\lst@InputCatcodes
+\def\lst@DefEC{%
+ \lst@CCECUse \lst@ProcessLetter
+  ^^80^^81^^82^^83^^84^^85^^86^^87^^88^^89^^8a^^8b^^8c^^8d^^8e^^8f%
+  ^^90^^91^^92^^93^^94^^95^^96^^97^^98^^99^^9a^^9b^^9c^^9d^^9e^^9f%
+  ^^a0^^a1^^a2^^a3^^a4^^a5^^a6^^a7^^a8^^a9^^aa^^ab^^ac^^ad^^ae^^af%
+  ^^b0^^b1^^b2^^b3^^b4^^b5^^b6^^b7^^b8^^b9^^ba^^bb^^bc^^bd^^be^^bf%
+  ^^c0^^c1^^c2^^c3^^c4^^c5^^c6^^c7^^c8^^c9^^ca^^cb^^cc^^cd^^ce^^cf%
+  ^^d0^^d1^^d2^^d3^^d4^^d5^^d6^^d7^^d8^^d9^^da^^db^^dc^^dd^^de^^df%
+  ^^e0^^e1^^e2^^e3^^e4^^e5^^e6^^e7^^e8^^e9^^ea^^eb^^ec^^ed^^ee^^ef%
+  ^^f0^^f1^^f2^^f3^^f4^^f5^^f6^^f7^^f8^^f9^^fa^^fb^^fc^^fd^^fe^^ff%
+  ^^^^03b6% <--- for ζ
+  ^^^^03b1^^^^03b2^^^^03b3%
+  ^^00}
+\lst@RestoreCatcodes
+\makeatother
+
+\begin{document}
+\title{
+\huge
+ Subgraph counting with fixed endpoints in the random connection model
+} 
+
+\author{
+  Qingwei Liu\footnote{\href{mailto:qingwei.liu@ntu.edu.sg}{qingwei.liu@ntu.edu.sg}}
+  \qquad
+      Nicolas Privault\footnote{
+\href{mailto:nprivault@ntu.edu.sg}{nprivault@ntu.edu.sg}
+}
+  \\
+\small
+Division of Mathematical Sciences
+\\
+\small
+School of Physical and Mathematical Sciences
+\\
+\small
+Nanyang Technological University
+\\
+\small
+21 Nanyang Link, Singapore 637371
+}
+
+\maketitle
+
+\vspace{-0.5cm}
+
+\begin{abstract} 
+ We present an algorithm for the closed-form computation
+ of the moments and cumulants of $k$-hop counts
+ with one or two fixed end points
+ in a random-connection model based on a Poisson point process.
+ As a consequence, we obtain a central limit theorem with
+ explicit convergence rates in the Kolmogorov distance. 
+\end{abstract}
+\noindent\emph{Keywords}:~
+Random-connection model, 
+subgraph count,
+normal approximation,
+Kolmogorov distance,
+cumulant method,
+Poisson point process,
+random graphs.
+
+\noindent 
+{\em Mathematics Subject Classification:} 
+60F05, % Central limit and other weak theorems
+60D05, % Geometric probability and stochastic geometry
+05C80, % Random graphs (graph-theoretic aspects)
+60G55. % Point processes (e.g., Poisson, Cox, Hawkes processes)
+% 60G57	Random measures
+%60B10. % Convergence of probability measures
+ 
+\baselineskip0.7cm
+
+\section{Introduction}
+\noindent
+Let $\eta$ be a stationary Poisson point process on $\R^d$, $d\geq 1$, with intensity $\lambda > 0$.
+The random connection model (RCM)
+built on $\eta$, and denoted by $\Gamma(\eta )$,
+ is a random geometric graph in which any two distinct vertices $x,y\in\eta$ are independently connected by an edge with a probability $H(x,y)$ that depends only on the locations of $x$ and $y$, where $H:\R^d\times \R^d\to[0,1]$ is a symmetric measurable connection function. 
+
+% The RCM can be regarded as a combination of Erd{\H o}s-R\'enyi graph and the random geometric graph. In the case of random geometric graph, whenever two distinct vertices are close enough, an edge will be added. On the other side, the Erd{\H o}s-R\'enyi graph can be regarded as a RCM with fixed number of vertices with edges being added with certain fixed probability.
+
+\medskip 
+
+Recently, convergence rates for the normal approximation of subgraph
+counts in the Poisson RCM
+ have been obtained in \cite{LiuPrivault} under the Kolmogorov distance 
+ from the combinatorics of their cumulants
+ and the {Statulevi\v{c}ius condition}, see \cite{rudzkis,doering}. 
+ 
+\medskip 
+
+In this paper, we generalize the approach of \cite{LiuPrivault}
+by adding $m$ fixed points located at $y_1 , \ldots,y_m \in \R^d$ 
+to the random-connection model $\Gamma(\eta )$.
+We denote by $\Gamma(\eta_{y_1, \ldots ,y_m})$ the random-connection
+graph constructed on the union $\eta_{y_1, \ldots ,y_m}$ of $\eta$ with the points
+$\{ y_1, \ldots ,y_m\}$.
+ 
+\medskip 
+
+% $\eta_{y_1, \ldots ,y_m}:=\eta\cup\{y_1, \ldots ,y_m\}$.
+ For this, we extend the cumulant formulas obtained in
+ \cite{LiuPrivault} for subgraph counts 
+ in the language of diagrams and set partitions from the 
+ RCM $\Gamma(\eta)$ to the RCM $\Gamma(\eta_{y_1, \ldots ,y_m})$.
+
+\medskip 
+
+In \cite{giles-privault2}, two-hop connectivity with two fixed endpoints
+has been considered. 
+
+\medskip 
+
+This paper is organised as follows.
+In Section~\ref{diagramrepresentation} we provide cumulant formulas in
+Proposition~\ref{mom-cumfor} via a diagram representation.
+As an application, in Section~\ref{khopcount} we state a Central Limit Theorem
+with Kolmogorov convergence rate for the count of $k$-hops
+with one and two endpoints.
+% In Section~\ref{appl-engineer} we consider some engineering applications, and
+ Section~\ref{statuleviciuscond} contains auxiliary results used in the proofs. 
+
+\section{Notation and preliminaries} 
+\subsubsection*{Graph notation} 
+\noindent 
+Let $G=(V_G,E_G)$ be a graph with vertex set $V_G$ and edge set $E_G$. For any $u,v\in V_G$, we say $u,v$ are adjacent in $G$ if $\{u,v\}\in E$, and in this case we write $u\sim v$.
+A subgraph of $G$ is a graph $G'=(V_{G'},E_{G'})$ such that $V_{G'}\subset V_G$ and $E'\subset E$, and $G'$ is an induced subgraph of $G$ if $E'$ consists of all edges of $G$ having both endpoints in $V_{G'}$.
+% We say that $u,v$ are connected, denote as $u\leftrightarrow v$, if there is a path between $u$ and $v$, i.e. there exist $v_1, \ldots ,v_n\in V$ such that $u\sim v_1\sim \cdots v_n \sim v$. 
+% The graph $G$ is connected if for any two vertices $u,v\in V$ there is a path from $u$ to $v$.
+% Two graphs $G=(V,E)$ and $G'=(V',E')$ are isomorphic if there is a bijection $T:V\to V'$ such that $\{u,v\}\in E$ if and only if $\{T(u),T(v)\}\in E'$ for any $u\ne v\in V$. We write $G\simeq G'$ to indicate $G,G'$ are isomorphic.
+\subsubsection*{Set partitions}
+\noindent
+For any $n\geq 1$ we let $[n]:=\{1, \ldots ,n\}$ and we let $|b|$ denote the number of elements of any finite set $b$. Let $\Pi (b)$ be the collection of all set partitions of set $b$, and $|\sigma|$ the number of blocks in the partition $\sigma\in\Pi(b)$.
+ Given two set partitions $\sigma_1,\sigma_2\in\Pi(b)$, we say that $\sigma_1$ is coarser than $\sigma_2$, or equivalently, $\sigma_2$ is finer than $\sigma_1$, written as $\sigma_2\preceq\sigma_1$ if any block in $\sigma_1$ is a combination of blocks in $\sigma_2$.
+We also denote by $\sigma_1\vee\sigma_2$ the finest set partition which is coarser than both $\sigma_1$ and $\sigma_2$, and by $\sigma_1\wedge\sigma_2$ the coarsest set partition that is finer than $\sigma_1$ and $\sigma_2$. 
+\subsubsection*{Poisson point process} 
+\noindent 
+Throughout this paper, $\eta$ denotes a stationary Poisson point process on $\R^d$ with intensity $\lambda$, which is defined by the following properties: \begin{enumerate}[i)]
+\item for any relatively compact Borel set $B\subset \R^d$, the distribution of $\eta(B)$ is Poisson with parameter $\lambda \mathrm{Vol}(B)$, where $ \mathrm{Vol}(B)$ stands for the volume of the set $B$, 
+\item for any $n\geq 2$ and all pairwise disjoint Borel sets $B_1, \ldots ,B_n\subset\R^d$, the random variables $\eta(B_1), \ldots ,\eta(B_n)$ are independent.
+\end{enumerate}
+ We also let 
+ $$\mathcal{C}:=\left\{\omega\subset\R \ : \ |\omega\cap A|<\infty ~\text{for any bounded set $A\subset\R^d$}\right\}
+ $$
+ denote the space of locally finite configurations on $\R^d$. 
+In the sequel, we let 
+$$
+\eta^r (\mathrm{d}\mathbf{x}):=\eta(\mathrm{d}x_1)\cdots\eta(\mathrm{d}x_r),
+ \qquad \mathbf{x}:=(x_1, \ldots ,x_r). 
+$$
+ For any $n,r\geq 1$, we set $\Pi [n\times r]:=\Pi ([n]\times[r])$ the collection of all set partitions of the set $\{(i,j):~1\leq i\leq n,~1\leq j\leq r\}$. 
+ The next lemma is a consequence of \cite[Proposition~2]{prkhp}.
+ \begin{lemma}
+  \label{fjl}
+   Given $u:\R^r\times \mathcal{C}\to\R$ be a measurable random process,
+ we have 
+\begin{equation} 
+\label{fjkld2}
+  \E\left[\left(\int_{(\R^d)^r}u(\mathbf{x},\eta)\eta^r (\mathrm{d}\mathbf{x})\right)^n\right]=\sum_{\rho\in\Pi [n\times r]}\E\left[\int_{(\R^d)^{|\rho|}}
+    \prod_{i=1}^nu(x_{i,1}, \ldots ,x_{i,r},\omega) \ \! 
+    \lambda^{|\rho|} ( \mathrm{d}\mathbf{x} ) \right], 
+\end{equation} 
+ where for any $\rho \in\Pi[n\times r]$
+ and
+ $(i,j) \in [n] \times [r]$ 
+ we let 
+ $$
+ x_{i,j}:=x_\ell \mbox{ ~if~ } (i,j)\in\rho_\ell
+ \mbox{ ~for some~ } \ell\in [|\rho |].
+ $$
+% V_\rho (\mathbf{y},\eta_{y_1, \ldots ,y_{|\rho|}})
+\end{lemma}
+\section{Cumulants of subgraph counts with fixed endpoints} % in $\Gamma(\eta_{y_1, \ldots ,y_m})$}
+\label{diagramrepresentation}
+\noindent
+Given $H:\R^d\times \R^d\to[0,1]$ is a symmetric measurable connection
+function, we assume the any two distinct points $x,y\in\real^d$ are
+independently connected by an edge with the probability $H(x,y)$,
+in which case we write $x\leftrightarrow y$. 
+
+\medskip
+
+Consider a connected graph $G=(V_G,E_G)$ with edge set $E_G$ and
+vertex set of the form % $E_G$ of the form
+$V_G=\{v_1, \ldots ,v_r, e_1,\ldots , e_m\}$ 
+where $r\geq 2$ and $m\geq 1$, such that
+\begin{enumerate}[i)]
+\item the subgraph induced by $G$ on $\{v_1, \ldots ,v_r\}$ remains connected, and 
+\item $e_1, \ldots ,e_m$ are not adjacent to each other. 
+\end{enumerate}
+\noindent
+ We also let 
+\begin{equation}
+\nonumber
+    {\cal A}_j:=\{ k \ : \ (v_k,e_j) \in E_G, 
+    \
+    k\in [\ell] \}
+\end{equation} 
+denote the neighborhood of $e_j$ within $\{v_1, \ldots ,v_r\}$,
+$j=1,\ldots , m$.  
+
+\medskip 
+
+ \noindent
+{\bf Example}. 
+Take $r=4$, $m=2$, $V = \{v_1, v_2, v_3 ,v_4\}$ % and ${\cal A} = \{e_1,e_2\}$,
+and let $G=(V_G,E_G)$ be the graph described in Figure~\ref{fig:diagram0}, 
+ with $V_G=\{v_1, v_2,v_3,v_4,e_1,e_2\}$.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+\draw[black, thick] (-1,1) rectangle (6,3);
+\filldraw [gray] (1,2) circle (2pt);
+\node[font=\small] at (1,2.4) {$v_1$};
+\filldraw [gray] (2,2) circle (2pt);
+\node[font=\small] at (2,2.4) {$v_2$};
+\filldraw [gray] (3,2) circle (2pt);
+\node[font=\small] at (3,2.4) {$v_3$};
+\filldraw [gray] (4,2) circle (2pt);
+\node[font=\small] at (4,2.4) {$v_4$};
+\filldraw [gray] (-0,2) circle (2pt);
+\node[font=\small] at (-0.5,2) {$e_1$};
+\filldraw [gray] (5,2) circle (2pt);
+\node[font=\small] at (5.5,2) {$e_2$};
+\draw[thick,blue] (1,2) .. controls (1.5,2.3) .. (2,2);
+\draw[thick,blue] (2,2) .. controls (2.5,2.3) .. (3,2);
+\draw[thick,blue] (2,2) .. controls (3,1.7) .. (4,2);
+\draw[thick,blue] (1,2) -- (0,2);
+\draw[thick,blue] (4,2) -- (5,2);
+\end{tikzpicture}
+\caption{
+ Graph $G=(V_G,E_G)$ with $V_G=\{v_1, v_2,v_3,v_4,e_1,e_2\}$, 
+ $n=3$, $r=4$, $m=2$.}
+\label{fig:diagram0}
+\end{figure}
+% so that $|B_i^{[r]}|$ and $|B_i^{[m]}|$ represent the in-degree and out-degree of the vertex $v_i$, respectively.
+\begin{definition}
+ Given $m$ fixed points located at $y_1 , \ldots,y_m \in \R^d$,
+ we let $N_{y_1,\ldots , y_m}^G$ denote the count of subgraphs
+ which are isomorphic to $G=(V_G,E_G)$ in
+ the RCM $\Gamma(\eta_{y_1,\ldots , y_m } )$, and 
+ such that there exists a (random) injection
+ $T:V_G \to \eta_{y_1,\ldots , y_m }$
+ satisfying $T(\{e_1,\ldots , e_m\})=\{y_1,\ldots , y_m\}$, a.s.. 
+\end{definition}
+\noindent
+ In the sequel, we write $N_{y_1,\ldots , y_m}^G$ as  
+\begin{equation}
+\nonumber
+  N_{y_1,\ldots , y_m}^G=\sum_{(x_1, \ldots ,x_r)\in\eta_r^{\ne}}f(x_1, \ldots ,x_r), 
+\end{equation}
+ where
+ 
+ $$
+ \eta_r^{\ne}:=\{(x_1, \ldots ,x_r) \ : \ x_i\in\eta
+ \mbox{ and } x_i\ne x_j~\mathrm{for}~i\ne j\},
+ $$
+ denotes the collection of $r$-tuples in $\eta$ with $r$ distinct entries,
+ $r\geq 1$, and 
+ $f:(\real^d)^r \to \{0,1\}$ is the random function defined as 
+\begin{equation}
+\nonumber
+f(x_1, \ldots ,x_r):=\prod_{i=1}^r\left(\prod_{
+  \substack{1 \leq j \leq m \\ \{v_i,e_j\}\in E_G }
+}
+\bone_{\{y_j\leftrightarrow x_i\}}\right)\prod_{\substack{1\leq k , \ell \leq r \\ \{e_\ell,e_k\}\in E_G}}\bone_{\{x_\ell\leftrightarrow x_k\}},
+\qquad
+ x_1,\ldots , x_r \in \R^d. 
+\end{equation}
+% and \begin{equation}\label{neighborhood1} E_i :=\left\{j\in [m] \ : \ \{ v_i , e_j \} \in E_G\right\}, \qquad i=1, \ldots ,r. \end{equation} 
+%
+%
+%
+%\section{Normal approximation of subgraph counts on $\Gamma(\eta_A)$}
+ 
+\begin{definition}
+  Let $\pi:=\{\pi_1, \ldots ,\pi_n\}$ be the partition of $\Pi[n\times r]$
+  given by 
+  $$
+  \pi_i=\left\{(i,1), \ldots ,(i,r)\right\},
+  \quad
+  i=1, \ldots , n.
+  $$
+ \begin{enumerate}[i)]
+   \item A set partition $\sigma\in\Pi[n\times r]$ is connected if $\sigma\vee\pi=\widehat{1}$, 
+     where $\widehat{1} = \{ [n]\times [r] \}$
+is the coarsest partition of $[n]\times [r]$. 
+\item 
+ A set partition $\sigma\in\Pi[n\times r]$ is non-flat if $\sigma\wedge\pi=\widehat{0}$,
+ where $\widehat{0}$ is the finest partition of $[n]\times [r]$.
+ \end{enumerate} 
+   \end{definition}
+   We also let
+   $\Pi_{\widehat{1}}[n\times r]$ denote the collection of all connected partitions. 
+The next proposition is an application of Lemma~\ref{fjl} above
+ and of Proposition~3.3 in \cite{LiuPrivault}. 
+\begin{prop}
+ The cumulants of $N_{y_1,\ldots , y_m}^G$ admit the expression 
+ \begin{equation}
+\nonumber % \label{connectedcumulant}
+\kappa_n\big(N_{y_1,\ldots , y_m}^G\big) =
+    \sum_{\substack{\rho\in\Pi_{\widehat{1}}[n\times r]\\\rho\wedge\pi=\widehat{0}} \atop {\rm (non-flat \ \! connected)}}
+   \lambda^{|\sigma |}
+   \E\left[
+     \int_{(\R^d)^{|\sigma |}}
+     \prod_{i=1}^nf(x_{i,1}, \ldots ,x_{i,r})
+     \mathrm{d}\mathbf{x}
+     \right], 
+  \qquad n\geq 1. 
+\end{equation}
+\end{prop}
+\begin{Proof}
+ For $\rho=\{\rho_1,\dots,\rho_h\}\in\Pi[n\times r]$, let 
+\begin{equation}
+W_\rho(x_1,\dots,x_{|\rho|}):=\prod_{i=1}^nf(x_{i,1},\dots,x_{i,r}),
+\end{equation}
+with $x_{i,j}:=y_\ell$ if $(i,j)\in\rho_\ell$ for $1\leq i\leq n$, $1\leq j\leq r$ and $1\le\ell\leq h$. Let also $F$ be the function
+ defined from $\cup_{n=1}^{\infty}\Pi[n\times r]$ to $\R$ as 
+\begin{equation}
+  F(\rho):=\lambda^{|\rho|}\int_{(\R^d)^{|\rho|}}\E\left[W_\rho(\mathbf{x})\right]\mathrm{d}\mathbf{x},
+  \qquad 
+ \rho\in\Pi [n\times r]. 
+\end{equation}
+It is not difficult to see that the function $F$ satisfies the connectedness factorization property in \cite[Definition~3.1]{LiuPrivault}. In consequence, we have the following expression of the $n$-th cumulant of $N$
+\begin{equation}
+  \label{connectedcumulant}
+  \kappa_n\big(N_{y_1,\ldots , y_m}^G\big)
+  =\sum_{\substack{\sigma\in\Pi_{\widehat{1}}[n\times r]\\\sigma\wedge\pi=\widehat{0}}}F(\sigma).
+\end{equation}
+\end{Proof} 
+\section{Partition diagrams}
+\noindent 
+Any set partition $\rho\in\Pi[n\times r]$
+will be represented as a diagram
+ $\Gamma (\rho,\pi )$ 
+ constructed by 
+ arranging the elements of $[n] \times [r]$
+ into an % $[n] \times r$
+ array of $n$ rows and $r$ columns, and
+ connecting all elements within a same block of $\rho$ 
+ by a tree graph. 
+ Next, to any diagram $\rho\in\Pi[n\times r]$ 
+ and connected graph $G$ on $r$ vertices, we associate a graph $\rho_G$
+ constructed on the blocks of the partition $\rho$. 
+For this, we generalize the construction
+of \cite{LiuPrivault} from $\Gamma(\eta)$ to
+ the random-connection
+graph $\Gamma(\eta_{y_1, \ldots ,y_m})$ constructed on the union of $\eta$ with the points
+$\{ y_1, \ldots ,y_m\}$.
+% Recall that $G=(V,E_G)$ is a connected graph with vertex set $V=\{v_1, \ldots ,v_{r+m}\}$ satisfying that the subgraph induced by $V_1:=\{v_1, \ldots ,v_r\}$ remains connected and $v_{r+1}, \ldots ,v_{r+m}$ are not adjacent with each other.
+% We denote by $G_U=(U,E_U)$ the subgraph of $G$ induced by $U=\{v_1, \ldots ,v_r\}$.
+ % , and for ease of notation we set $\Gamma(\eta_{A}):=\Gamma(\eta_{y_1, \ldots ,y_m})$ when $A=\{y_1, \ldots ,y_m\}\subset \R^d$.
+ % , and assume that the blocks of $\rho= ( a_1, \ldots ,a_\ell ) \in\Pi[n\times r]$ are listed according to the lexicographic order.
+ \begin{definition}
+   \label{fjklf}
+%   Partition diagram.
+   Given $\rho$ a partition of $[n\times r]$
+   and $G=(V_G,E_G)$ a connected graph 
+   on $V_G:=\{v_1, \ldots ,v_r, e_1,\ldots , e_m\}$, 
+   we let $\rho_G$ denote the graph % partition diagram
+   % from $n\times r + m$ nodes denoted respectively by $(i,j) \in [n] \times [r]$, and $(j) \in [m]$,
+   constructed as follows on $[m] \cup [n\times r]$:
+\begin{enumerate}[i)]  
+\item for all $i\in [n]$
+  and $j_1, j_2\in [r]$, $j_1\not= j_2$,  
+  an edge links $(i,j_1)$ to $(i,j_2)$
+  iff $\{v_{j_1},v_{j_2}\}\in E_G$. 
+\item for all
+  $k\in [m]$
+  and 
+  $(i,j)\in [n]\times [r]$, an edge
+  links $(k)$ to $(i,j)$ iff $\{v_j,e_k\}\in E_G$; 
+\item for all $(i_1,j_1)\in [n]\times [r]$
+  and $(i_2,j_2) \in [n]\times [r]$,
+  merge any two nodes $(i_1,j_1)$ and $(i_2,j_2)$ 
+  such that $(i_1,j_1)\in b$ and $(i_2,j_2)\in b$ for some block $b$
+  of $\rho$. 
+\end{enumerate}
+In addition, we eliminate any redudant edges
+created in $\rho_G$ by the above construction.
+ \end{definition}
+\noindent
+{\bf Example}. 
+Take $r=4$, $m=2$, $V = \{v_1, v_2, v_3 ,v_4\}$, ${\cal A} = \{e_1,e_2\}$
+and $E_G=\{v_1, v_2,v_3,v_4,e_1,e_2\}$. 
+ Figure~\ref{fig:diagram1} 
+ shows the graph % partition diagram
+ $\rho_G$ defined from $G=(V_G,E_G)$ in Figure~\ref{fig:diagram0}
+ and the $9$-block partition $\rho \in \Pi ( [3\times 4])$
+ given by 
+ \begin{align*}
+   \rho = \big\{ & \{(1,1)\},
+   \\
+   & \{(1,2),(2,2)\},\{(1,3)\},
+   \\
+   & \{(1,4)\},
+   \\
+   & \{(2,1),(3,1)\},
+   \\
+   & \{(2,3)\},
+   \\
+   & \{(2,4),(3,4)\},
+   \\
+   & \{(3,2)\},
+   \\
+   & \{(3,3)\}\big\}. 
+\end{align*} 
+ 
+ % \vspace{0.3cm}
+
+\begin{figure}[H]
+\captionsetup[subfigure]{font=footnotesize}
+\centering
+\subcaptionbox{Multigraph before merging edges and vertices.}[.5\textwidth]{%
+\begin{tikzpicture}
+\draw[black, thick] (0,0) rectangle (7,4);
+\foreach \i in {1,2,3}
+{
+\filldraw [gray] (2,\i) circle (2pt);
+\filldraw [gray] (3,\i) circle (2pt);
+\filldraw [gray] (4,\i) circle (2pt);
+\filldraw [gray] (5,\i) circle (2pt);
+\draw[thick, dash dot,blue] (2,\i) .. controls (2.5,\i) .. (3,\i);
+\draw[thick, dash dot,blue] (4,\i) .. controls (3.5,\i) .. (3,\i);
+\draw[thick, dash dot,blue] (1,2) .. controls (1.5,\i) .. (2,\i);
+\draw[thick, dash dot,blue] (6,2) .. controls (5.5,\i) .. (5,\i);
+}
+
+\draw[thick, dash dot,blue] (3,1) .. controls (4,1+.4) .. (5,1);
+\draw[thick, dash dot,blue] (3,2) .. controls (4,2-.4) .. (5,2);
+\draw[thick, dash dot,blue] (3,3) .. controls (4,3-.4) .. (5,3);
+
+\node[anchor=north,font=\tiny] at (2,1) {(3,1)};
+\node[anchor=north,font=\tiny] at (3,1) {(3,2)};
+\node[anchor=north,font=\tiny] at (4,1) {(3,3)};
+\node[anchor=north,font=\tiny] at (5,1) {(3,4)};
+\node[anchor=south,font=\tiny] at (2,3) {(1,1)};
+\node[anchor=south,font=\tiny] at (3,3) {(1,2)};
+\node[anchor=south,font=\tiny] at (4,3) {(1,3)};
+\node[anchor=south,font=\tiny] at (5,3) {(1,4)};
+\node[anchor=south,font=\tiny] at (2,2) {(2,1)};
+\node[anchor=south,font=\tiny] at (3,2) {(2,2)};
+\node[anchor=south,font=\tiny] at (4,2) {(2,3)};
+\node[anchor=south,font=\tiny] at (5,2) {(2,4)};
+
+\filldraw [gray] (1,2) circle (2pt);
+\node[anchor=east,font=\tiny] at (1,2) {$(1)$};
+\filldraw [gray] (6,2) circle (2pt);
+\node[anchor=west,font=\tiny] at (6,2) {$(2)$};
+\draw[thick] (3,3) -- (3,2);
+\draw[thick] (2,2) -- (2,1);
+\draw[thick] (5,2) -- (5,1);
+\end{tikzpicture}}%
+\subcaptionbox{Graph $\rho_G$ after merging edges and vertices.}[.5\textwidth]{
+\begin{tikzpicture}
+\draw[black, thick] (0,0) rectangle (7,4);
+\foreach \i in {3}
+{
+\filldraw [gray] (2,\i) circle (2pt);
+\filldraw [gray] (3,\i) circle (2pt);
+\filldraw [gray] (4,\i) circle (2pt);
+\filldraw [gray] (5,\i) circle (2pt);
+\draw[thick,blue] (2,\i) .. controls (2.5,\i) .. (3,\i);
+\draw[thick,blue] (4,\i) .. controls (3.5,\i) .. (3,\i);
+\draw[thick,blue] (3,\i) .. controls (4,\i-.4) .. (5,\i);
+\draw[thick,blue] (1,2) .. controls (1.5,\i) .. (2,\i);
+\draw[thick,blue] (6,2) .. controls (5.5,\i) .. (5,\i);
+}
+\node[anchor=south,font=\tiny] at (2,3) {3};
+\node[anchor=south,font=\tiny] at (3,3) {4};
+\node[anchor=south,font=\tiny] at (4,3) {5};
+\node[anchor=south,font=\tiny] at (5,3) {6};
+\node[anchor=south,font=\tiny] at (2,2) {7};
+\node[anchor=south,font=\tiny] at (4,2) {8};
+\node[anchor=south,font=\tiny] at (5,2) {9};
+\node[anchor=north,font=\tiny] at (3,1) {10};
+\node[anchor=north,font=\tiny] at (4,1) {11};
+\node[anchor=north,font=\tiny] at (1,2) {1};
+\node[anchor=north,font=\tiny] at (6,2) {2};
+\filldraw [gray] (1,2) circle (2pt);
+\filldraw [gray] (6,2) circle (2pt);
+\filldraw [gray] (2,2) circle (2pt);
+\filldraw [gray] (4,2) circle (2pt);
+\filldraw [gray] (5,2) circle (2pt);
+\filldraw [gray] (3,1) circle (2pt);
+\filldraw [gray] (4,1) circle (2pt);
+\draw[thick,blue] (1,2) .. controls (1.5,2) .. (2,2);
+\draw[thick,blue] (3,3) .. controls (2.5,2.5) .. (2,2);
+\draw[thick,blue] (3,3) .. controls (3.5,2.5) .. (4,2);
+\draw[thick,blue] (3,3) .. controls (4,2.5) .. (5,2);
+\draw[thick,blue] (5,2) -- (6,2);
+\draw[thick,blue] (2,2) -- (3,1) -- (4,1);
+\draw[thick,blue] (3,1) -- (5,2);
+
+\end{tikzpicture}}%
+\caption{
+  Example of graph $\rho_G$
+  % on $G=(V_G,E_G)$ with $E_G=\{v_1, v_2,v_3,v_4,e_1,e_2\}$ 
+ with $n=3$, $r=4$, and $m=2$.}
+\label{fig:diagram1}
+\end{figure}
+
+\vspace{-0.4cm}
+
+% \medskip 
+
+\noindent
+ If $\rho\in\Pi[n\times r]$
+ takes the form $\rho = \{ b_1,\ldots , b_{\ell}\}$, 
+ the graph $\rho_G$ forms a connected graph with
+ $m + \ell$ vertices 
+ indexed as $V_{\rho_G}=[m+\ell]$ according to the lexicographic order
+ on $\inte \cup \inte \times \inte$. For $j \in [m]$ we let ${\cal A}_j$
+ denote the neighborhood of $(j)$ in $\rho_G$, i.e.
+\begin{equation}
+\nonumber
+    {\cal A}_j:=\{ m + k \ : \ \exists (s,i)\in b_k ~\mathrm{s.t.}~
+    (v_k,e_j) \in E_G, 
+    \
+    k\in [\ell] \},
+\end{equation} 
+ where $m+k$ is the index of the vertex represented by 
+ the block $b_k$, $j=1,\ldots , m$. 
+ For example, in Figure~\ref{fig:diagram1}
+ we have ${\cal A}_1=\{3,7\}$ and ${\cal A}_2=\{6,9\}$. 
+ 
+\medskip
+
+\noindent
+ Definition~\ref{fjklf} allows us to rewrite the moment and cumulant formulas
+ \eqref{fjkld2} and \eqref{connectedcumulant}
+in the following graphical representation. 
+\begin{prop}\label{mom-cumfor}
+  The moments and cumulants of $N_{y_1,\ldots , y_m}^G$ admit
+  the following expressions: 
+\begin{eqnarray*}
+  \E\big[\big(N_{y_1,\ldots , y_m}^G\big)^n\big]&=&\sum_{\rho\in\Pi_{\widehat{1}}[n\times r]
+    \atop {\rm (non-flat)}}
+  \lambda^{|\rho |}
+  \int_{(\R^d)^{|\rho|}}\prod_{\substack{1 \leq j \leq m \\ i\in {\cal A}_j}}
+    H(x_i,y_j)
+    \ \prod_{
+      \substack{1 \leq k , \ell \le|\rho|
+        \\
+        \{ k , \ell \}\in E_{\rho_G}
+    }}H(x_\ell,x_k)\mathrm{d}x_1 \cdots\mathrm{d}x_{|\rho|},\\
+    \kappa_n\big(N_{y_1,\ldots , y_m}^G\big)&=&
+    \sum_{\substack{\rho\in\Pi_{\widehat{1}}[n\times r]\\\rho\wedge\pi=\widehat{0}} \atop {\rm (non-flat \ \! connected)}}
+  \lambda^{|\rho |}
+  \int_{(\R^d)^{|\rho|}}\prod_{\substack{1 \leq j \leq m
+      \\
+    i\in {\cal A}_j}}  H(x_i,y_j)
+  \ \prod_{\substack{
+      1\leq k , \ell \le|\rho|
+      \\
+  \{ k , \ell \}\in E_{\rho_G}}}H(x_\ell,x_k)\mathrm{d}x_1\cdots\mathrm{d}x_{|\rho|}.
+\end{eqnarray*}
+\end{prop}
+ We note in particular that $N_{y_1,\ldots , y_m}^G$ has positive cumulants. % skewness. 
+
+\medskip
+
+\noindent
+ The above cumulant formula is implemented in the code given in appendix. 
+
+\subsubsection*{Random graph regimes} % Asymptotic cumulant growth and normal approximation} % for $k$-hop counts}
+\label{khopcount}
+% We assume that the Poisson process $\eta$ on $\R^d$ has intensity $\lambda$, and that the connection function is of the form $H_\lambda(x,y):=c_\lambda H(x,y)$. 
+\noindent
+In what follows,
+we make the following assumption on the measurable and symmetric 
+connection function $H:\R^d\times\R^d\to[0,1]$. 
+% where we let $H(x):=H(0,x)$, $x\in \real^d$. 
+ \begin{assumption}
+  \label{fjkldsf} 
+ We assume that $H$ is translation invariant, i.e. $H(x,y)=H(0,y-x)$ for all $x,y\in\R^d$, and that 
+\begin{equation}
+  \label{integrability-1}
+0<\kappa_H:=\int_{\R^d}H(0,x)\mathrm{d}x<\infty.
+\end{equation}
+\end{assumption}
+It has been shown in \cite{LiuPrivault} that the Rayleigh connection function $H(x,y):=e^{-\beta\|x-y\|^2}$, for some $\beta>0$, satisfies Assumption~\ref{fjkldsf}. 
+ In what follows, we replace $H(x,y)$ with
+$$
+H_\lambda (x,y) : = \frac{c_\lambda}{\lambda} H(x,y),
+\qquad x, y \in \real^d. 
+$$
+ In this case, we have 
+$$
+ \E\big[ N_{y_1,\ldots , y_m}^G \big]
+% = \kappa_1\big(N_{y_1,\ldots , y_m}^G\big)
+ =  \lambda^{|V_G|-|E_G|} c_\lambda^{|E_G|}
+     \int_{(\R^d)^r}
+       \prod_{\substack{1 \leq j \leq m
+      \\
+    i\in {\cal A}_j}}  H(x_i,y_j)
+  \ \prod_{\substack{
+      1\leq k , \ell \le r 
+      \\
+  \{ v_k , v_\ell \}\in E_G}}H(x_\ell,x_k)\mathrm{d}x_1\cdots\mathrm{d}x_r.
+$$ 
+Next, we investigate the asymptotic behaviour of the cumulants
+$\kappa_n\big(N_{y_1,\ldots , y_m}^G\big)$ in \eqref{connectedcumulant} as the intensity $\lambda$ tends to infinity under two different regimes. 
+The notation $\displaystyle 1 \ll c_\lambda$ means that
+ $\lim_{\lambda \to \infty} c_\lambda = \infty$. 
+\begin{definition}
+  We consider the dilute and sparse random graph regimes, defined as follows for some constant $K>0$.  
+\begin{itemize}
+\item Dilute regime:
+  $\displaystyle 1 \ll c_\lambda\leq K \lambda^\varepsilon$ %  K$
+  for some $\varepsilon \in (0,1]$. 
+  \item Sparse regime: $\displaystyle 0 < c_\lambda\leq K \lambda^\varepsilon$
+    for some $\varepsilon \in (-\infty , 0]$. 
+\end{itemize}
+\end{definition}
+ When $c_\lambda\equiv K$ for all $\lambda>0$, the dilute regime is also called the full random graph regime. For simplicity we take $K=1$ throughout this section. 
+
+\medskip
+
+In the following, we focus on the cases when the graph $G$ is a $k$-hop with one
+or two fixed endpoints, and also when $G$ is a $k$-cycle with $k$ fixed endpoints.
+By $k$-hop, we means a path with $k$ edges, and $u,v$ are said to be connected by a $k$-hop if there exist at least one path with $k$-edges between $u$ and $v$.
+% , denote as $u\overset{k}{\leftrightarrow}v$. 
+Our main results rely on a representation with respect to the all non-flat connected set partition $\rho$ and corresponding graph $\rho_G$.
+ We denote by $0$ the origin in $\R^d$, and consider $x\ne 0$ arbitrary. 
+
+ \medskip 
+
+  We also recall the following lemma from \cite[Lemma~2.6]{LiuPrivault}.
+ \begin{lemma}
+   \label{numpartition}
+   \begin{enumerate}[i)]
+   \item
+     For $n, r\geq 1$ the number of non-flat connected partitions on $[n]\times[r]$ is upper bounded by $n!^r r!^{n-1}$.
+\item For $n\geq 1$ and $r\geq 2$, the number of non-flat connected partitions on $[n]\times[r]$ with $1+(r-1)n$ blocks is between $((r-1)r)^{n-1}(n-1)!$ and $((r-1)r)^{n-1}n!$.
+   \end{enumerate}
+ \end{lemma}
+\section{$k$-hops with a single endpoint}
+\noindent 
+In this section we take $m=1$ and
+we consider the count $N_{k,1}$ of $k$-hops with a single endpoint $y_1 = 0$ at the origin in $\real^d$, given by 
+\begin{equation}
+\nonumber
+  N_{k,1}:=\sum_{(x_1, \ldots , x_k)\in\eta_{\ne}^k}\prod_{i=0}^{k-1}\bone_{\{x_i\leftrightarrow x_{i+1}\}}.
+\end{equation}
+When $k=r=1$ we have $\Pi_{\widehat{1}}[n\times r]=\{\widehat{1}\}$ and 
+ $N_{1,1}$ is a Poisson random variable with parameter
+ $\lambda \kappa_H$, so that 
+\begin{equation}
+\nonumber
+\kappa_n(N_{1,1})=\int_{\R^d}H_\lambda(x)\lambda\mathrm{d}x=\lambda \kappa_H,
+\qquad n \geq 1.
+\end{equation}
+The following result provides
+growth estimates for the cumulants of $N_{k,1}$ in the dilute and sparse regimes.
+\begin{thm}\label{khopone}
+  Let $n\geq 1$ and $k\geq 2$,
+  and suppose that Assumption~\ref{fjkldsf} is satisfied. 
+\begin{enumerate}[i)]
+\item In the dilute regime with $\varepsilon \in (0,1]$, we have
+  \begin{equation}
+    \label{onefixed-1}
+    0<\kappa_n(N_{k,1})\leq
+    n!^k k!^{n-1}
+    \kappa_H^{1+(k-1)n} \lambda^{(1+(k-1)n)\varepsilon}
+    ,
+\end{equation}
+and, for $n=2$, 
+\begin{equation}
+  \label{onefixed-2}
+  (k-1)k
+  C^{2k}
+  \lambda^{(2k-1)\varepsilon} 
+  \leq \kappa_2(N_{k,1})
+ \leq 
+  k!
+  (2\kappa_H)^{2k-1}
+  \lambda^{(2k-1)\varepsilon} 
+  ,
+\end{equation}
+ where $C>0$ is a constant independent of $k\geq 3$ and $n \geq 2$.
+\item In the sparse regime with $\varepsilon \in (-\infty , 0]$, we have 
+\begin{equation}
+\label{fjkldsf-1} 
+\kappa_H^k \lambda^{k\varepsilon}
+\leq \kappa_n(N_{k,1})\leq
+n!^k k!^{n-1}
+  \kappa_H^k \lambda^{k\varepsilon}. 
+\end{equation}
+\end{enumerate}
+\end{thm}
+\begin{Proof}
+ Taking $r=k$, we have $G=(V_G,E_G)$ with 
+$$V_G=\{v_1, \ldots ,v_r,e_1\},$$
+and 
+$$E=\{\{e_1,v_1\},\{v_1,v_2\}, \ldots ,\{v_{r-1},v_r\}\}.$$
+According to Proposition~\ref{mom-cumfor}, every non-flat connected partition $\rho\in\Pi[n\times r]$ corresponds to a summand of order $O(\lambda^{|\rho|-( 1 - \varepsilon ) |E_{\rho_G}|})$. 
+For each $\rho\in\Pi[n\times r]$, we can see from the construction of
+the graph $\rho_G$ that merging two nodes into one results into the loss of at most one edge.
+ 
+\noindent $i)$ Dilute regime with $\varepsilon \in (0,1]$.
+  In this case, the dominating asymptotic order over all non-flat connected set partition is $O(\lambda^{ ( 1+(r-1)n ) \varepsilon })$, which comes from the set partition $\bar{\rho}:=\{a_1, \ldots ,a_{1+(r-1)n}\}$ with 
+$$a_1:=\{(i,1):~i=1, \ldots ,n\},$$
+   and all other blocks $a_i$ contain exactly one element.
+   Therefore, by Lemma~\ref{numpartition} we have
+$$
+   \kappa_n(N_{k,1}) \leq 
+  n!^rr!^{n-1}
+   \kappa_H^{1+(r-1)n} \lambda^{( 1+(r-1)n )\varepsilon }.
+$$
+ In addition, Lemma~\ref{mom-cumfor} show
+ that all cumulants are positive,
+ which completes the proof of \eqref{onefixed-1}. 
+ On the other hand, when $r\geq 2$, applying the estimates
+ of Lemma~\ref{numpartition} in tandem shows that 
+\begin{equation}
+\nonumber
+\kappa_2(N_{k,1})\geq (r-1)rC^{2r} \lambda^{(2r-1)\varepsilon},
+\end{equation}
+ where $C>0$ is a constant independent of $k \geq 3$ and $n \geq 2$.
+
+\noindent
+$ii)$
+Sparse regime with $\varepsilon \in (-\infty , 0]$.
+In this case, the dominating asymptotic order  $O(\lambda^{ r \varepsilon })$ is contributed by the graph $\bar{\rho}_G$ corresponding to $\bar{\rho}:=\{b_1, \ldots ,b_r\}$, where 
+$$b_i=\{(k,i):~k=1, \ldots ,n\}, \qquad  i=1, \ldots ,r,
+$$
+ which similarly yields \eqref{fjkldsf-1}.  
+\end{Proof}
+In the next table we use the code provided
+in appendix to compute the first three cumulants of $N_G$ when $G$ is
+a single edge graph with a single endpoint in dimension $d=1$,  
+after loading the relevant function definitions. 
+
+\begin{table}[H] 
+  \centering
+\scriptsize %   \small
+%  \resizebox{\textwidth}{!}
+    {
+  \begin{tabular}{|ll|ll|} % {\textwidth}{|XX|XX|}
+ \hline
+ \multicolumn{2}{|l}{
+x,y,λ,β = var("x,y,λ,β"); assume(β$>$0)
+ }
+ & \multicolumn{2}{l|}{\# Variable definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ }  
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+   def H(x,y,β): return exp(-β*(x-y)**2)
+ } 
+  & \multicolumn{2}{l|}{\# Connection function}  
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+def mu(x,λ,β): return λ % *exp(-β*x**2)
+}
+  & \multicolumn{2}{l|}{\# Intensity}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+G = [[1,2]]
+}
+  & \multicolumn{2}{l|}{\# Single vertex graph ($k=2$)}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+ E=[[1]]; d=1
+} 
+ & \multicolumn{2}{l|}{\# Single endpoint ($m=1$), dimension $d=1$}   
+ \\
+\hline
+\end{tabular}
+}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|ll|ll|} % {\textwidth}{|XX|XX|}
+\hline
+\multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{c|}{Cumulant} & \multicolumn{1}{c|}{Output} & \multicolumn{1}{c|}{Partitions} 
+ \\ 
+ \hline
+\multicolumn{1}{|c|}{c(1,d,G,E,mu,H)} & \multicolumn{1}{c|}{1st} & \multicolumn{1}{c|}{$\frac{\pi {\lambda}^{2}}{{\beta}}$} & \multicolumn{1}{c|}{1} 
+\\
+\hline
+\multicolumn{1}{|c|}{c(2,d,G,E,mu,H)} & \multicolumn{1}{c|}{2nd} & \multicolumn{1}{c|}{$\frac{\pi^{{3}/{2}} {\lambda}^{3} {\left(4 \, \sqrt{3} + 9\right)} + 2 \, \pi \sqrt{{\beta}} {\lambda}^{2} {\left(\sqrt{3} + 3\right)}}{6 \, {\beta}^{{3}/{2}}}$} & \multicolumn{1}{c|}{6} 
+\\
+\hline
+\multicolumn{1}{|c|}{c(3,d,G,E,mu,H)} & \multicolumn{1}{c|}{3rd} & \multicolumn{1}{c|}{
+$\frac{\sqrt{22} {\left(\pi^{2} {\left(\sqrt{11} {\left(19 \, \sqrt{6} + 24 \, \sqrt{2} + 27\right)} + 36 \, \sqrt{2}\right)} {\lambda}^{4} + 6 \, \sqrt{11} \pi {\beta} {\lambda}^{2} {\left(\sqrt{6} + \sqrt{2}\right)} + 6 \, \sqrt{11} \sqrt{\pi^{3} {\beta}} {\lambda}^{3} {\left(4 \, \sqrt{6} + 5 \, \sqrt{2} + 6\right)}\right)}}{132 \, {\beta}^{2}}
+$} & \multicolumn{1}{c|}{68} 
+ \\ % [1ex]
+\hline
+\end{tabular}
+}
+\caption{First three cumulants of the count of $2$-hops with one endpoint.}
+\end{table} 
+
+\vspace{-0.6cm}
+
+\noindent
+ In Figures~\ref{fig1-11}-\ref{fig2-11} we plot the corresponding
+moment expressions vs their Monte Carlo estimates. 
+\begin{figure}[H]
+  \centering
+ \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=1\linewidth, height=5cm]{end_points_multidim/one_endpoint_two_hops/m1} 
+    \caption{First moment.} 
+ \end{subfigure}
+ \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=1\linewidth, height=5cm]{end_points_multidim/one_endpoint_two_hops/m2} 
+    \caption{Second moment.} 
+ \end{subfigure}
+  \caption{First and second moments.} 
+\label{fig1-11} 
+\end{figure}
+\vskip-0.4cm 
+\begin{figure}[H]
+  \centering
+ \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=1\linewidth, height=5cm]{end_points_multidim/one_endpoint_two_hops/m3} 
+    \caption{Third moment.} 
+ \end{subfigure}
+ \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=1\linewidth, height=5cm]{end_points_multidim/one_endpoint_two_hops/m4} 
+    \caption{Fourth moment.} 
+ \end{subfigure}
+  \caption{Third and fourth moments.} 
+\label{fig2-11} 
+\end{figure}
+\noindent
+ In what follows, we consider the centered and normalized subgraph count cumulants defined as 
+$$
+ \widetilde{N}_{k,l}:= \frac{N_{k,l} - \kappa_1 (N_{k,l})}{\sqrt{\kappa_2(N_{k,l})}}, \qquad l=1,\ldots , m. 
+$$
+ 
+ \begin{corollary}
+  \label{jfklds}
+  Let $n\geq 1$ and $k\geq 2$,
+  and suppose that Assumption~\ref{fjkldsf} is satisfied. 
+  \begin{enumerate}[i)]
+    \item In the dilute regime with $\varepsilon \in (0,1]$, we have
+\begin{equation}
+\label{standkop-1}
+\big|\kappa_n(\widetilde{N}_{k,1})\big|\leq n!^{k-1}
+C_1^{n/2}
+\lambda^{-(n/2-1)\varepsilon },
+\end{equation}
+  where $C_1 > 0$ is a constant.
+\item
+  In the sparse regime with $\varepsilon \in (-\infty , 0]$, we have
+  \begin{equation}
+    \label{standkop-2}
+    \big|\kappa_n(\widetilde{N}_{k,1})\big|\leq n!^{k-1}
+    C_2^{n/2}
+    \lambda^{-(n/2-1) k \varepsilon }, 
+\end{equation}
+  \end{enumerate}
+ where $C_2 > 0$ is a constant.
+\end{corollary}
+ From Corollary~\ref{jfklds}, 
+ in the dilute regime with $\varepsilon \in (0,1]$,
+% the skewness of $N_{k,1}$ satisfies  
+   % $$ \big|\kappa_3\big(\widetilde{N}_{k,1}\big)\big|\leq 6^{k-1} \sqrt{C_1} \lambda^{-\varepsilon /2}, $$ and
+   by Lemma~\ref{Statuleviciuscond1}
+   we have the Kolmogorov convergence bound 
+\begin{equation}
+\nonumber
+\sup_{x\in\R}\big|\IP\big(\widetilde{N}_{k,1} \leq x\big)-\Phi(x)\big|\leq C_k \lambda^{ - \varepsilon  / ( 4k-2 )},
+\qquad
+  k\geq 2, 
+\end{equation}
+for $C_k>0$ a constant depending only on $k\geq 2$,
+where $\Phi$ is the cumulative distribution function of the standard normal distribution. 
+
+\section{$k$-hops with two endpoints}
+\noindent 
+In this section we take $m=2$ and we consider the count
+\begin{equation}
+\nonumber
+N_{k,2}:=\sum_{(x_1, \ldots , x_{k-1})\in\eta_{\ne}^{k-1}}
+\left(\prod_{i=0}^{k-2}\bone_{\{x_i\leftrightarrow x_{i+1}\}}\right)\bone_{\{x_{k-1}\leftrightarrow x\}}
+\end{equation}
+of $k$-hops with two fixed endpoints located at $y_1=0$ and $y_2=x$. 
+Note that when $k=1$, $N_{k,2}$ is a Bernoulli random variable with success rate $H(0,x)$.
+On the other hand, when $k=2$,
+taking $r:=k-1$ we have
+$$\Pi_{\widehat{1}}[n\times 1]=\{\widehat{1}\},
+\qquad n\geq 1,
+$$
+ hence 
+\begin{equation}
+\nonumber
+  \kappa_n(N_{k,2})=\lambda^{-1+2\varepsilon }\int_{\R^d}H(y)H(y-x)\mathrm{d}y,
+ \qquad 
+ n\geq 1,
+\end{equation}
+which implies that $N_{k,2}$ is Poisson distributed
+ with parameter $\lambda^{-1+2\varepsilon }\int_{\R^d}H(y)H(y-x)\mathrm{d}y$.
+\begin{thm}\label{khoptwo}
+  Let $n\geq 1$ and $k\geq 3$. 
+  Under Assumption \eqref{integrability-1} we have the following
+  cumulants estimates for the count $N_{k,2}$ of $k$-hops with two 
+  endpoints at $y_1=0$ and $y_2=x$. 
+\begin{enumerate}[i)]
+\item In the dilute regime with 
+  $\varepsilon \in [ -1/(k-1) , 1]$, we have
+\begin{equation}
+\nonumber
+0<\kappa_n(N_{k,2})\leq n!^{k-1} (k-1)!^{n-1}\kappa_H^{1+(k-2)n} \lambda^{-n + (1+(k-1)n)\varepsilon },
+\end{equation}
+for $n\geq 1$,
+and, for $n=2$, 
+\begin{equation}
+\nonumber
+(k-2)(k-1)C_1^{2k} \lambda^{-2 + (2k-1)\varepsilon }
+\leq \kappa_2(N_{k,2})
+\leq 2^{k-2}(k-1)!\kappa_H^{2k-3} \lambda^{-2 + (2k-1)\varepsilon },
+\end{equation}
+where $C_1 > 0$ is a constant.
+\item In the dilute regime and sparse regimes with 
+ $ \varepsilon < -1/(k-1)$, we have 
+\begin{equation}
+\nonumber
+0<\kappa_n(N_{k,2})\leq n!^{k-1} (k-1)!^{n-1}\kappa_H^{1+(k-2)n} \lambda^{-1 + k \varepsilon },
+\end{equation}
+for $n\geq 1$, and, for $n=2$,  
+\begin{equation}
+\nonumber
+C_2^k \lambda^{ -1 + k \varepsilon } \leq \kappa_2(N_{k,2})
+\leq 2^{k-2} (k-1)!\kappa_H^{2k-1} \lambda^{ -1 + k \varepsilon },
+\end{equation}
+where $C_2 > 0$ is a constant.
+\end{enumerate}
+\end{thm}
+\begin{Proof}
+ Taking $r:=k-1$, we represent the $k$-hop as $G=(V_G,E_G)$ with 
+$$V_G=\{v_1, \ldots ,v_r,e_1,e_2\},$$ and 
+$$E_G=\left\{\{e_1,v_1\},\{v_1,v_2\}, \ldots ,\{v_{r-1},v_r\},\{v_r,e_2\}\right\}.$$
+Invoking the cumulant formula in Proposition~\ref{mom-cumfor}, we define 
+\begin{equation}
+\nonumber
+F(\rho):=\lambda^{|\rho|}\int_{(\R^d)^{|\rho|}}
+\prod_{\substack{ j=1 , 2
+  \\ i\in {\cal A}_j}
+}H_{\lambda}(x_i-y_j)
+ \prod_{\substack{1\leq k , \ell \le|\rho|\\\{ k , \ell \}\in E_{\rho_G}}}H_{\lambda}(x_\ell-x_k)\mathrm{d}x_1\cdots\mathrm{d}x_{|\rho|},
+\end{equation}
+where $y_1:=0$, and $y_2:=x$.
+For any $\rho\in\Pi[n\times r]$, we can see from the construction of the
+graph $\rho_G$ that merging two nodes into one may
+result into the loss of at most two edges.
+This implies that the dominating asymptotic power in the sum is
+\begin{equation}
+\nonumber
+n_{{\rm max}}:= r \varepsilon - ( 1 - \varepsilon ) - (n-1) r \min (  1/r  - \varepsilon ,0). 
+% = ( 1 - \alpha ) r. 
+\end{equation}
+Therefore, for every non-flat connected partition
+$\rho\in\Pi_{\widehat{1}}[n\times r]$, the quantity $F(\rho)$ has an asymptotic order not exceeding $\lambda^{
+  (r-1)n + (1+nr)\varepsilon }$ when $\varepsilon \in [1/r ,1]$, and not exceeding $\lambda^{(r+1)\varepsilon -1 }$ when $\varepsilon < 1/r $. Hence, we have
+\begin{eqnarray*}
+  F(\rho)&=&\lambda^{|\rho|- ( 1 - \varepsilon ) |E_{\rho_G}|}\int_{(\R^d)^{|\rho|}}\prod_{\substack{j=1,2\\i\in {\cal A}_j}}
+  H(x_i-y_j)
+  \prod_{\substack{1\leq k , \ell \le|\rho|\\\{  k , \ell \}\in E_{\rho_G}}}H(x_\ell-x_k)\mathrm{d}x_1\cdots\mathrm{d}x_{|\rho|}\nonumber\\
+&\leq &\lambda^{n_{{\rm max}}}\int_{(\R^d)^{|\rho|}}\prod_{\substack{1\leq k , \ell \le|\rho|\\\{ k , \ell \}\in E_{\rho_G}}}H(x_\ell-x_k)\mathrm{d}x_1\cdots\mathrm{d}x_{|\rho|}\nonumber\\
+&\leq & \kappa_H^{|\rho|} \lambda^{n_{{\rm max}}},
+\end{eqnarray*}
+where the last inequality is due to the fact that the induced subgraph $\widetilde{G}$ of $\rho_G$ with the vertex set $V_{\widetilde{G}} = \{1, \ldots ,|\rho|\}$ is always connected, since the induced subgraph $G_1$ is connected. Without loss of generality, we may assume that $\kappa_H\geq 1$, otherwise, we replace it with $1$. Together with Lemma~\ref{numpartition}, we have 
+\begin{eqnarray*}
+0<\kappa_n(N_{k,2})\leq n!^{r-1}r!^{n-1}\kappa_H^{1+(r-1)n} \lambda^{n_{{\rm max}}}.
+\end{eqnarray*}
+For $ \varepsilon \in [ 1/r , 1]$, by Lemma~\ref{numpartition}, we have
+$$ 
+\kappa_2(N_{k,2}) =
+\sum_{\substack{\rho\in\Pi_{\widehat{1}}[n\times r]\\\rho\wedge\pi=\widehat{0}}}\lambda^{|\rho|-
+  ( 1 - \varepsilon ) |E_{\rho_G}|}F(\rho)
+\geq (r-1)r C_1^{2r} \lambda^{-n + (1+nr)\varepsilon },
+$$ 
+ while for $\varepsilon < 1/r $, we have
+\begin{equation}
+\nonumber
+\kappa_2(N_{k,2})\geq C_2^r \lambda^{r- ( 1 - \varepsilon ) (r+1)},
+\end{equation}
+ where $C_1,C_2>0$ are constants. 
+\end{Proof} 
+ \begin{table}[H] 
+  \centering
+% \scriptsize %   \small
+  %  \resizebox{\textwidth}{!}
+      {
+  \begin{tabular}{|ll|ll|} % {\textwidth}{|XX|XX|}
+ \hline
+ \multicolumn{2}{|l}{
+def mu(x,λ,β): return λ
+}
+  & \multicolumn{2}{l|}{\# Intensity}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+G = [[1,2],[2,3]]
+}
+  & \multicolumn{2}{l|}{\# Three-hop graph} 
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+ E=[[1],[3]]
+} 
+ & \multicolumn{2}{l|}{\# Two endpoints}   
+ \\
+\hline
+\hline
+\multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{c|}{Computed quantity} & \multicolumn{1}{c|}{Output} & \multicolumn{1}{c|}{Partitions} 
+ \\ 
+ \hline
+\multicolumn{1}{|c|}{c(1,1,G,E,mu,H)} & \multicolumn{1}{c|}{First cumulant} & \multicolumn{1}{c|}{$\frac{1}{2} \, {\lambda}^{3} \sqrt{\frac{\pi^{3}}{{\beta}^{3}}} e^{- {\left(\mathit{x1}_{1}^{2} - 2 \, \mathit{x1}_{1} \mathit{x2}_{1} + \mathit{x2}_{1}^{2}\right)} {\beta} / 4 }$} & \multicolumn{1}{c|}{1} 
+\\ % [1ex]
+\hline
+\end{tabular}
+}
+\caption{First moment of $4$-hops with two endpoints.} 
+\end{table} 
+
+\vspace{-0.8cm}
+
+\begin{corollary}
+\label{fjkl}
+Let $n\geq 1$ and $k\geq 3$,
+and suppose that Assumption~\eqref{integrability-1} holds. 
+\begin{enumerate}[i)]
+\item In the dilute regime with $\varepsilon \in [1/(k-1),1]$, we have 
+$$
+  \big|
+  \kappa_n\big(\widetilde{N}_{k,2}\big)
+  \big|
+  \leq n!^{k-1}C_1^{n/2}\lambda^{-(n/2-1)\varepsilon },
+$$
+ where $C_1>0$ is a constant.
+\item In the dilute and sparse regimes with $\varepsilon < 1 / ( k-1)$,
+  we have 
+$$
+  \big| \kappa_n\big(\widetilde{N}_{k,2}\big)
+  \big|
+  \leq n!^{k-1} C_2^{n/2} \lambda^{(n/2-1)(1 - k \varepsilon )}, 
+$$ 
+where $C_2>0$ is a constant. 
+\end{enumerate}
+\end{corollary}
+ From Corollary~\ref{fjkl}, 
+ in the dilute regime with $\varepsilon \in [1/(k-1),1]$,
+% the skewness of $N_{k,2}$ satisfies  
+ % $$ \big| \kappa_3\big(\widetilde{N}_{k,2}\big) \big| \leq 6^{k-1}\sqrt{C_1}\lambda^{ -\varepsilon/2} $$ and
+  by Lemma~\ref{Statuleviciuscond1}
+   we have the Kolmogorov convergence bound 
+\begin{equation}
+\nonumber
+\sup_{x\in\R}\big|\IP \big(\widetilde{N}_{k,2}\leq x\big)-\Phi(x)\big|\leq
+C_k \lambda^{ - \varepsilon / ( 4k-10) },
+\end{equation}
+ for $C_k>0$ a constant depending only on $k \geq 3$. 
+ In addition, when $\varepsilon < 1/(k-1)$ the skewness of $N_{k,2}$ satisfies  
+$$
+\big|   \kappa_3\big(\widetilde{N}_{k,2}\big)
+\big|
+\leq 6^{k-1}\sqrt{C_2} \lambda^{(1- k \varepsilon )/2}, 
+$$ 
+hence when $\varepsilon \in (1/k, 1/(k-1))$, 
+ $\widetilde{N}_{k,2}$
+ converges in distribution
+ to the standard normal distribution
+ ${\cal N}(0,1)$ as $\lambda$ tends to infinity 
+ by Theorem~1 in \cite{Janson1988}.  
+
+% as illustrated in Figures~\ref{f1}-\ref{f2} using empirical probability density plots.
+
+   \medskip
+
+     \noindent
+ Figure~\ref{fig5} presents 
+second and third and fourth-order Gram-Charlier expansions \eqref{gram_charlier}
+ for the probability density function of the
+ count $N_{4,2}$ of $4$-hops with two endpoints,
+ based on exact cumulant expressions  
+ The purple areas correspond to probability density estimates
+obtained by Monte Carlo simulations. 
+The second-order expansions correspond to
+the Gaussian diffusion approximation 
+obtained by matching first and second-order moments. 
+  
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1.\textwidth]{end_points_multidim/two_endpoints_50/two_endpoints_50_1.pdf} 
+\caption{\small $\lambda = 50$.} 
+\end{subfigure}
+\hskip-0.2cm
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1.\textwidth]{end_points_multidim/two_endpoints_200/two_endpoints_200_1.pdf} 
+\caption{\small $\lambda = 200$.} 
+\end{subfigure}
+\caption{\small Gram-Charlier density expansions {\em vs} Monte Carlo density estimation.} 
+\label{fig5}
+\end{figure}
+
+\vspace{-0.3cm}
+
+\noindent
+Figure~\ref{fig5} shows that
+the actual probability density estimates obtained by simulation 
+can be significantly different from
+their Gaussian diffusion approximations when 
+skewness takes large absolute values. 
+In addition, in Figure~\ref{fig5} 
+the fourth-order Gram-Charlier expansions appear to give the best fit
+to the actual probability densities, 
+which have positive skewness. 
+
+\section{Cycles with fixed endpoints}
+ \noindent 
+Let $y_1, \ldots ,y_k\in \R^d$ be distinct.
+We represent the number of
+subgraphs isomorphic to a $k$-cycle
+connecting with $k$ endpoints 
+in the RCM $\Gamma(\eta_{y_1, \ldots ,y_k})$
+as 
+\begin{equation}
+\nonumber
+  N_3:=\sum_{(x_1, \ldots , x_k)\in\eta_{\ne}^k}\prod_{i=1}^k\left(\bone_{\{x_i\leftrightarrow x_{i+1}\}}\bone_{\{x_i\leftrightarrow y_i\}}\right),
+\end{equation}
+ where we set $x_{k+1}:=x_1$. 
+% Set $\widetilde{N}_i$, $i=1,2,3$ as the standardised $N_i$, respectively.
+\begin{thm}\label{kcycle1}
+  Let $k\geq 3$ and $n\geq 2$.
+  Under Assumption~\eqref{integrability-1}, we have the following estimates for cumulants of $N_3$, the count of $k$-cycle with $k$ fixed endpoints 
+  located at $y_1, \ldots ,y_k$ in the dilute and sparse regimes. 
+\begin{enumerate}[i)]
+\item In the dilute regime with $\varepsilon \in [k / ( 2k-1) , 1]$, we have
+\begin{equation}
+\nonumber
+0<\kappa_n(N_3)\leq
+\kappa_H
+n!^{k-1} k!^{n-1}
+ \kappa_H^{(k-1)n} \lambda^{- kn + ( 2kn-(n-1))\varepsilon },
+\end{equation}
+and, for $n=2$, 
+\begin{equation}
+\nonumber
+\kappa_2(N_3)\geq (k-1)kC^{2k} \lambda^{-2k + (4k-1)\varepsilon }
+,
+\end{equation}
+ where $C>0$ is a constant independent of $k,n$.
+\item In the dilute regime and sparse regimes with
+  $\varepsilon < k / ( 2k-1 )$, 
+\begin{equation}
+\nonumber
+\kappa_n(N_3)\leq n!^{k-1} k!^{n-1}\kappa_H^{1+(k-1)n} \lambda^{-(1-2\varepsilon )k},
+\end{equation}
+for all $n\geq 1$, and, for $n=2$,  
+\begin{equation}
+\nonumber
+\lambda^{(1+2\varepsilon )k}\widetilde{C}^k \leq \kappa_2(N_3)
+\leq 2^{k-1}k!\kappa_H^{2k-1} \lambda^{-1+2k\varepsilon },
+\end{equation}
+where $C,\widetilde{C}>0$ are constants.
+\end{enumerate}
+\end{thm}
+\begin{Proof}
+Let $r=k$, take $G=(V_G,E_G)$ with $V_G=\{v_1,\ldots,v_r,e_1,\ldots,e_r\}$, and 
+$$E_G=\{\{v_1,v_2\},\{v_2,v_3\}, \ldots ,\{v_{r-1},v_r\},\{e_r,v_1\},\{v_1,e_r\}, \ldots ,\{v_r,e_r\}\}.
+$$
+ Again, we invoke Proposition~\ref{mom-cumfor}, with 
+\begin{equation}
+\nonumber
+F(\rho):=\lambda^{|\rho|}\int_{(\R^d)^{|\rho|}}\prod_{\substack{
+    1 \leq j \leq r
+    \\
+    i\in {\cal A}_j}}
+H_{\lambda}(x_i-y_j)
+\prod_{\substack{1\leq k , \ell \le|\rho|\\\{ k , \ell \}\in E_{\rho_G}}}H_{\lambda}(x_\ell-x_k)\mathrm{d}x_1\cdots\mathrm{d}x_{|\rho|}.
+\end{equation}
+For all $\rho\in\Pi[n\times r]$, merging nodes in the same block of $\rho$ will result in merging edges. The same argument as before, the dominating asymptotic order of $F(\rho)$ among all non-flat connected $\rho$ comes from the graph $\rho_G$ with maximal or minimal amount of edges. Moreover,  the dominating asymptotic order of $F(\rho)$ is 
+$$
+n_{{\rm max}} := - (1 - 2 \varepsilon ) r-(n-1)\min (
+ r 
+ - (2r-1)\varepsilon 
+, 0).
+$$
+Therefore, for all non-flat connected diagram $\rho\in\Pi_{\widehat{1}}[n\times r]$, the quantity $F(\rho)$ has an asymptotic order not exceeding $\lambda^{
+  - nr 
+  +( 1 + 2nr-n ) \varepsilon 
+}$ when $\varepsilon \in [ r / ( 2r-1) ,1]$, and not exceeding $\lambda^{
+  -( 1 - 2 \varepsilon )r
+}$ when $\varepsilon < r / ( 2r-1)$.
+Furthermore, the estimates of $\kappa_n(N_3)$ directly follow
+from Lemma~\ref{numpartition}.
+\end{Proof}
+
+\begin{corollary}
+  Let $n\geq 1$ and $k\geq 3$,
+  and suppose that Assumption~\eqref{integrability-1} holds. 
+  \begin{enumerate}[i)]
+  \item In the dilute regime, for $\varepsilon \in [1/(2k-1),1]$
+    we have 
+$$
+    \big|
+    \kappa_n\big(\widetilde{N}_3\big)
+    \big|
+    \leq n!^{k-1} C_1^{n/2} \lambda^{-(n/2-1)\varepsilon },
+    $$
+    where $C_1>0$ is a constant.
+\item In the dilute and sparse regimes, for 
+ $\varepsilon < 1 / (2k-1)$ we have 
+    $$
+  \big|
+  \kappa_n\big(\widetilde{N}_3\big)
+  \big|
+  \leq n!^{k-1}
+  C_2^{n/2} \lambda^{ (n/2-1 ) (1 - 2 \varepsilon )k},
+      $$
+      where $C_2>0$ is a constant.
+      \end{enumerate} 
+\end{corollary}
+  In addition, when $\varepsilon \in [ 1/(2k-1) , 1 ]$
+  in the dilute regime, this implies 
+  the Kolmogorov convergence bound 
+\begin{equation}
+\nonumber
+\sup_{x\in\R}\big|\IP \big(\widetilde{N}_{k,2}\leq x\big)-\Phi(x)\big|\leq C_k \lambda^{
+  - \varepsilon / ( 4k-2 ) },
+\end{equation}
+for $C_k>0$ a constant depending only on $k \geq 3$. 
+
+\begin{table}[H] 
+  \centering
+% \scriptsize %   \small
+    \resizebox{\textwidth}{!}
+      {
+  \begin{tabular}{|ll|ll|} % {\textwidth}{|XX|XX|}
+ \hline
+ \multicolumn{2}{|l}{
+def mu(x,λ,β): return λ
+}
+  & \multicolumn{2}{l|}{\# Intensity}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+G = [[1,2],[2,3],[3,1]]
+}
+  & \multicolumn{2}{l|}{\# Triangle graph} 
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+ E=[[1],[2],[3]]
+} 
+ & \multicolumn{2}{l|}{\# Three endpoints}   
+ \\
+\hline
+\hline
+\multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{c|}{Computed quantity} & \multicolumn{1}{c|}{Output} & \multicolumn{1}{c|}{Partitions} 
+ \\ 
+ \hline
+\multicolumn{1}{|c|}{c(1,1,G,E,mu,H)} & \multicolumn{1}{c|}{First cumulant} & \multicolumn{1}{c|}{$\frac{1}{4} \, {\lambda}^{3} \sqrt{\frac{\pi^{3}}{{\beta}^{3}}} e^{\left(-\frac{1}{2} \, {\left(\mathit{x1}_{1}^{2} - \mathit{x1}_{1} \mathit{x2}_{1} + \mathit{x2}_{1}^{2} - {\left(\mathit{x1}_{1} + \mathit{x2}_{1}\right)} \mathit{x3}_{1} + \mathit{x3}_{1}^{2}\right)} {\beta}\right)}$} & \multicolumn{1}{c|}{1} 
+\\ % [1ex]
+\hline
+\end{tabular}
+}
+    % \caption{Summary of branching tree notation.}
+\end{table} 
+
+\vspace{-0.6cm}
+
+\appendix
+
+\section{Gram-Charlier expansions}
+\label{s5}
+\noindent
+ The Gram-Charlier expansion of the continuous
+probability density function
+$\phi_X(x)$ of a random variable $X$ admitting a density
+is given by 
+\begin{equation} 
+\label{gram_charlier}
+\phi_X(x)=
+\frac{1}{\sqrt{\kappa_2}}
+\varphi \left( \frac{x-\kappa_1}{\sqrt{\kappa_2}}\right)
++
+\frac{1}{\sqrt{\kappa_2}}
+\sum_{n=3}^{\infty}
+c_n H_n\left(
+\frac{x-\kappa_1}{\sqrt{\kappa_2}} \right)
+\varphi \left( \frac{x-\kappa_1}{\sqrt{\kappa_2}}\right),
+\end{equation}
+ see \S~17.6 of \cite{cramer}, where 
+\begin{itemize}
+  \item $\displaystyle \varphi(x) :=\frac{1}{\sqrt{2\pi}}\re^{-x^2/2}$,
+ $ x\in \real$,
+    is the standard normal density function,
+    \item 
+$\displaystyle 
+H_n(x):=\frac{(-1)^n}{\varphi(x)}
+\frac{\partial^n \varphi}{\partial x^n}(x)$,
+ $x\in\real$, 
+ is the Hermite polynomial of degree $n\geq 0$, with
+$H_0(x)=1$, 
+$H_1(x)=x$, 
+$H_3(x)=x^3-3x$,
+$H_4(x)=x^4-6x^2+3$, 
+ $H_6(x)=x^6-15x^4+45x^2-15$,
+ \item 
+  the sequence $(c_n)_{n\geq 3}$ is given from the cumulants $(\kappa_n)_{n\geq 1}$
+of $X$ as 
+$$ 
+c_n = \frac{1}{(\kappa_2)^{n/2}}
+\sum_{m=1}^{[n/3]}
+\sum_{\substack{l_1+\cdots+l_m=n\\
+{l_1,\ldots , l_m \geq 3}}}\frac{\kappa_{l_1}\cdots \kappa_{l_m}}{m! l_1!\cdots l_m!}, \qquad n\geq 3.
+$$ 
+\end{itemize} 
+ In particular, $c_3$ and $c_4$ can be expressed from 
+ the skewness $\kappa_3/(\kappa_2)^{3/2}$ and
+ the excess kurtosis $\kappa_4/(\kappa_2)^2$, with 
+$$ 
+c_3 = \frac{\kappa_3}{3! (\kappa_2)^{3/2}}, 
+\quad
+c_4 = \frac{\kappa_4}{4! (\kappa_2)^2}, 
+\quad 
+c_5 = \frac{\kappa_5}{5! \kappa_5^{5/2}},
+\quad
+\mbox{and}
+\quad
+ c_6 =
+ \frac{\kappa_6}{6! (\kappa_2)^3}
+ +
+  \frac{(\kappa_3)^2}{2(3!)^2 (\kappa_2)^3}
+.
+$$
+
+% \noindent
+\noindent
+ In addition to the first-order expansion
+\begin{equation} 
+\nonumber % \\label{diffusion} 
+\phi_X^{(1)}(x)=
+\frac{1}{\sqrt{\kappa_2}}
+\varphi \left( \frac{x-\kappa_1}{\sqrt{\kappa_2}}\right)
+\end{equation}
+which corresponds to a Gaussian diffusion approximation,
+we have the following third and fourth-order expansions given by 
+\begin{equation} 
+\nonumber % \label{third} 
+\phi_X^{(3)}(x)=
+\frac{1}{\sqrt{\kappa_2}}
+\varphi \left( \frac{x-\kappa_1}{\sqrt{\kappa_2}}\right)
+\left( 1 +
+c_3 H_3\left(
+\frac{x-\kappa_1}{\sqrt{\kappa_2}} \right)
+\right)
+\end{equation}
+ and
+\begin{equation} 
+\nonumber % \\label{fourth} 
+\phi_X^{(4)}(x)=
+\frac{1}{\sqrt{\kappa_2}}
+\varphi \left( \frac{x-\kappa_1}{\sqrt{\kappa_2}}\right)
+\left( 1 +
+c_3 H_3\left(
+\frac{x-\kappa_1}{\sqrt{\kappa_2}} \right)
++
+c_4 H_4\left(
+\frac{x-\kappa_1}{\sqrt{\kappa_2}} \right)
+ + c_6 H_6\left( \frac{x-\kappa_1}{\sqrt{\kappa_2}} \right)
+ \right).
+\end{equation}
+
+\section{The method of cumulant for normal approximation}
+\label{statuleviciuscond}
+\noindent
+The following results are summarized from from Chapter~2 in \cite{saulis} and the work of \cite{doring} and are tailored for our applications to the random-connection model.
+% We should mention that the assumption \eqref{Statuleviciuscond2} is now known as the {\it Statulevi\v{c}ius condition}.
+\begin{lemma}\label{Statuleviciuscond1}
+Let $\{X_\lambda\}$ be a family of random variable with mean zero and unit variance for all $\lambda>0$. Suppose that for each $\lambda$, all moments of the random variable $X_\lambda$ exist and for $j\geq 3$ and sufficiently large $\lambda$, the cumulant of order $j$ can be bounded by
+\begin{equation}
+  \label{Statuleviciuscond2}
+|\kappa_j(X_\lambda)|\leq \frac{(j!)^{1+\gamma}}{(\Delta_\lambda)^{j-2}},
+\end{equation}
+with $\gamma\ge0$ a constant independent of $\lambda$, while $\Delta_\lambda\in(0,\infty)$ may depend on $\lambda$, then the following assertions hold.
+\begin{enumerate}[i.]
+\item (Berry-Esseen bound) {\rm one has
+\begin{equation}
+\nonumber
+  \sup_{x\in\R}|\IP(X_\lambda\leq x)-\Phi(x)|\leq C_\gamma (\Delta_\lambda)^{-1/(1+2\gamma)},
+\end{equation}
+ for $C_\gamma>0$ constant depending only on $\gamma$,
+where $\Phi$ is the cumulative distribution function of standard normal. See \cite[Corollary~2.1]{saulis} and \cite[Theorem~2.4]{doering}.}
+\item (concentration inequality) {\rm for any $x\ge0$ and sufficiently large $\lambda$, 
+\begin{equation}
+\nonumber
+  \IP(|X_\lambda|\geq x)\le2\exp\left\{-\frac14\min\left\{\frac{x^2}{2^{1/(1+\gamma)}},(x\Delta_\lambda)^{1/(1+\gamma)}\right\}\right\}.
+\end{equation} See the corollary to \cite[Lemma~2.4]{saulis}.}
+\item (moderate deviation principle) {\rm Let $\{a_\lambda\}$ be a sequence of real numbers tending to infinity such that 
+$$\frac{a_\lambda}{(\Delta_\lambda)^{1/(1+2\gamma)}}\to0,$$ as $\lambda\to\infty$. Then $\{a_\lambda^{-1} X_\lambda\}_\lambda$ satisfied a moderate deviation principle with speed $a_\lambda^2$ and rate function $x^2/2$. See \cite[Theorem~1.1]{doring}.}
+\item (Normal approximation with Cram\'er corrections) {\rm There exist constant $c$ such that for sufficiently large $\lambda$ and $x\in(0,c(\Delta_\lambda)^{1/(1+2\gamma)})$,
+\begin{eqnarray*}
+\frac{\IP(X_\lambda\geq x)}{1-\Phi(x)}&=&\exp\{\tilde{L}(x)\}\left(1+O\left(\frac{x+1}{(\Delta_\lambda)^{1/(1+2\gamma)}}\right)\right),\\
+\frac{\IP(X_\lambda\leq -x)}{\Phi(-x)}&=&\exp\{\tilde{L}(-x)\}\left(1+O\left(\frac{x+1}{(\Delta_\lambda)^{1/(1+2\gamma)}}\right)\right),
+\end{eqnarray*}
+where $\tilde{L}(x)$ is directly related to the Cram\'er-Petrov series. See \cite[Lemma~2.3]{saulis}.}
+\end{enumerate}
+\end{lemma}
+
+\section{Code}
+% \label{fjkldsf}
+ 
+\begin{lstlisting}
+from sage.all import *
+
+# n rows r columns
+
+def partitions(set):
+    if len(set) == 1:
+        yield [ set ]
+        return
+    first = set[0]
+    for smaller in partitions(set[1:]):
+        # insert `first` in each of the subpartition's subsets
+        for m, subset in enumerate(smaller):
+            yield smaller[:m] + [[ first ] + subset]  + smaller[m+1:]
+        # put `first` in its own subset
+        yield [ [ first ] ] + smaller
+
+def nonflat(partition,n,r):
+    p = []
+    for j in partition:    
+        seq = list(map(lambda x: (x-1)//r,j))
+        p.append(len(seq) == len(set(seq)))
+    return all(p)
+
+def connected(partition,n,r):
+    q = []; c = 0
+    if n  == 1: return all([len(j)==1 for j in partition])
+    for j in partition:
+        jk = list(set(map(lambda x: (x-1)//r,j)))
+        if(len(jk)>1):            
+            if c == 0:
+                q = jk; c += 1
+            elif(set(q) & set(jk)):
+                d=[y for y in (q+jk) if y not in q]
+                q = q + d
+    return n == len(set(q))
+
+def connectednonflat(n,r):
+    set = list(range(1,n*r+1))
+    randd = []
+    for m, p in enumerate(partitions(set), 1):
+        randd.append(sorted(p))
+    for rou in range(r,(r-1)*n+2):    
+        rs = [d for d in randd if (nonflat(d,n,r)==1 and len(d)==rou)]
+        rss = [e for e in rs if connected(e,n,r)==1]
+        print("Connected non-flat partitions with",rou,"blocks:",len(rss))
+    cnfp = [e for e in randd if (connected(e,n,r)==1 and nonflat(e,n,r)==1)]
+    print("Connected non-flat set partitions:",len(cnfp))
+    return cnfp
+
+def graph(iniG,setpartition,n,r):
+# Generates all the edges that include two vertices in G
+# Replaces the elements in G to the first element in every block
+    G = []
+    for j in range(n):
+        for hop in iniG:
+            G.append([r*j+hop[0],r*j+hop[1]])
+        G.append([0,j*r+1]); G.append([j*r+r,n*r+1])
+    for i in setpartition:
+        if(len(i)>1):
+            b = []
+            for j in G:
+                b.append([i[0] if ele in i else ele for ele in j])
+            G = b
+    for i in G: i.sort()
+    return G
+
+def cumulants(n,d,G,xy,mu,H):
+    r=len(set(flatten(G)))
+    epts=len(xy);
+    if (epts>=2): x=xy[0];y=xy[1]
+    else:
+        if (epts==1): x=xy[0];y=var("y")
+        else: x,y=var("x,y")
+    cumulants = 0; ii=0
+    action_dict = dict(enumerate([str(x)+str(key)+str(x)+str(l) for key in range(0,n*r+2) for l in range(1,d+1)], start=1))
+    cnfp=connectednonflat(n,r)
+    for setpartition in cnfp: 
+        ii=ii+1;print('[%d/%d]\r'%(ii,len(cnfp)),end="")
+        rhoG=graph(G,setpartition,n,r)
+        for l in range(1,d+1): action_dict[l] = var(str(x)+ str(l))
+        for l in range(1,d+1): action_dict[d*(n*r+1)+l] = var(str(y)+str(l))
+        for key in range(1,n*r+1): 
+            for l in range(1,d+1): action_dict[key*d+l] = var(str(x)+str(key)+str(x)+str(l))
+        edgesrhoG = [i for n, i in enumerate(rhoG) if i not in rhoG[:n]]
+	# print("Edges of the graph rho_G:",edgesrhoG)
+        vertrhoG = set(flatten(edgesrhoG));vertrhoG.remove(0);vertrhoG.remove(n*r+1)
+        # print("Vertices of rho_G:",list(vertrhoG))
+        strr = ''
+        for i in vertrhoG:
+            strr = '*mu({},{},{})'.format(action_dict[i*d+l],λ,β) + strr
+            for l in range(1,d+1): strr = strr + ').integrate({},-infinity,+infinity)'.format(action_dict[i*d+l])
+        for i in edgesrhoG:
+            if (epts==2 or i[1]!=n*r+1): 
+                if (epts>=1 or i[0]!=0):
+                    for l in range(1,d+1): strr = '*H({},{},{})'.format(action_dict[i[0]*d+l],action_dict[i[1]*d+l],β) + strr
+        strr = '('*len(vertrhoG)*d+strr[1:]
+        cumulants += eval(preparse(strr))
+    # print("Computing code for the expression is:",strr)
+    # print("Result of the integral is",eval(preparse(strr)))
+    cumulants = simplify(cumulants).canonicalize_radical().maxima_methods().rootscontract().simplify()
+    print("Degree =",cumulants.degree(λ)) 
+    return cumulants 
+\end{lstlisting}
+
+\footnotesize
+
+\newcommand{\etalchar}[1]{$^{#1}$}
+\def\cprime{$'$} \def\polhk#1{\setbox0=\hbox{#1}{\ooalign{\hidewidth
+  \lower1.5ex\hbox{`}\hidewidth\crcr\unhbox0}}}
+  \def\polhk#1{\setbox0=\hbox{#1}{\ooalign{\hidewidth
+  \lower1.5ex\hbox{`}\hidewidth\crcr\unhbox0}}} \def\cprime{$'$}
+\begin{thebibliography}{KGKL{\etalchar{+}}21}
+
+\bibitem[Cra46]{cramer}
+H.~Cram{\'e}r.
+\newblock {\em Mathematical methods of statistics}.
+\newblock Princeton University Press, Princeton, NJ, 1946.
+
+\bibitem[DE13]{doring}
+H.~D{\"{o}}ring and P.~Eichelsbacher.
+\newblock Moderate deviations via cumulants.
+\newblock {\em J. Theoret. Probab.}, 26:360--385, 2013.
+
+\bibitem[DJS22]{doering}
+H.~D{\"o}ring, S.~Jansen, and K.~Schubert.
+\newblock The method of cumulants for the normal approximation.
+\newblock {\em Probab. Surv.}, 19:185--270, 2022.
+
+\bibitem[Jan88]{Janson1988}
+S.~Janson.
+\newblock Normal convergence by higher semiinvariants with applications to sums
+  of dependent random variables and random graphs.
+\newblock {\em Ann. Probab.}, 16(1):305--312, 1988.
+
+\bibitem[KGKL{\etalchar{+}}21]{giles-privault2}
+A.P. Kartun-Giles, K.~Koufos, X.~Lu, N.~Privault, and D.~Niyato.
+\newblock Two-hop connectivity to the roadside in a vanet under the random
+  connection model.
+\newblock Preprint arXiv:2005.14407v1, 2021.
+
+\bibitem[LP23]{LiuPrivault}
+Q.~Liu and N.~Privault.
+\newblock Normal approximation of subgraph counts in the random-connection
+  model.
+\newblock Preprint arXiv:2301.12145, 26 pages, 2023.
+
+\bibitem[Pri19]{prkhp}
+N.~Privault.
+\newblock Moments of $k$-hop counts in the random-connection model.
+\newblock {\em J. Appl. Probab.}, 56(4):1106--1121, 2019.
+
+\bibitem[RSS78]{rudzkis}
+R.~Rudzkis, L.~Saulis, and V.A. Statulevi\v{c}ius.
+\newblock A general lemma on probabilities of large deviations.
+\newblock {\em Litovsk. Mat. Sb.}, 18(2):99--116, 217, 1978.
+
+\bibitem[SS91]{saulis}
+L.~Saulis and V.A. Statulevi\v{c}ius.
+\newblock {\em Limit theorems for large deviations}, volume~73 of {\em
+  Mathematics and its Applications (Soviet Series)}.
+\newblock Kluwer Academic Publishers Group, Dordrecht, 1991.
+
+\end{thebibliography}
+
+\end{document}
+
+\bibliography{../../bib/privault}
+\bibliographystyle{alpha}
+% \bibliographystyle{plainnat}
+
+
+\begin{table}[H] 
+  \centering
+% \scriptsize %   \small
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{|ll|ll|} % {\textwidth}{|XX|XX|}
+ \hline
+ \multicolumn{2}{|l}{
+x,y,λ,β = var("x,y,λ,β"); assume(β$>$0)
+ }
+   & \multicolumn{2}{l|}{\# Variable definitions}  
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+   def H(x,y,β): return exp(-β*(x-y)**2)
+ } 
+  & \multicolumn{2}{l|}{\# Connection function}  
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+def mu(x,λ,β): return λ % *exp(-β*x**2)
+}
+  & \multicolumn{2}{l|}{\# Intensity}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+G = [[1,2]]
+}
+  & \multicolumn{2}{l|}{\# Single vertex graph}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+ E=[ [1] ]
+} 
+ & \multicolumn{2}{l|}{\# Single endpoint}   
+ \\
+\hline
+\hline
+\multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{c|}{Computed quantity} & \multicolumn{1}{c|}{Output} & \multicolumn{1}{c|}{Partitions} 
+ \\ 
+ \hline
+\multicolumn{1}{|c|}{c(1,1,G,E,mu,H)} & \multicolumn{1}{c|}{First cumulant} & \multicolumn{1}{c|}{$\frac{\sqrt{3} \pi {\lambda}^{2}}{3 \, {\beta}}$} & \multicolumn{1}{c|}{1} 
+\\
+\hline
+\multicolumn{1}{|c|}{c(2,1,G,E,mu,H)} & \multicolumn{1}{c|}{Second cumulant} & \multicolumn{1}{c|}{$\frac{\sqrt{3} {\left(\sqrt{6} \pi^{{3}/{2}} {\lambda}^{3} + 2 \, \pi \sqrt{{\beta}} {\lambda}^{2}\right)}}{3 \, {\beta}^{{3}/{2}}}$} & \multicolumn{1}{c|}{33} 
+\\
+\hline
+\multicolumn{1}{|c|}{c(3,1,G,E,mu,H)} & \multicolumn{1}{c|}{Third cumulant} & \multicolumn{1}{c|}{
+$\frac{2 \, \sqrt{3} {\left(2 \, \pi^{2} {\lambda}^{4} {\left(7 \, \sqrt{15} + 30 \, \sqrt{7}\right)} + 35 \, \sqrt{3} \sqrt{\pi^{3} {\beta}} {\lambda}^{3} {\left(3 \, \sqrt{2} + 1\right)} + 70 \, \pi {\beta} {\lambda}^{2}\right)}}{105 \, {\beta}^{2}}$} & \multicolumn{1}{c|}{68} 
+ \\ % [1ex]
+\hline
+\end{tabular}
+}
+    % \caption{Summary of branching tree notation.}
+\end{table} 
+
+\vspace{-0.6cm}
+
+$$
+\frac{4 \, \sqrt{2145} {\left(7 \, \sqrt{\pi} {\left(\pi^{2} {\left(\sqrt{13} {\left(\sqrt{55} + 36 \, \sqrt{3}\right)} + 24 \, \sqrt{165}\right)} {\lambda}^{5} + \sqrt{2145} \pi {\beta} {\lambda}^{3} {\left(7 \, \sqrt{2} + 6\right)}\right)} + 2 \, {\left(2 \, \sqrt{143} \pi^{2} {\left(7 \, \sqrt{3} {\left(3 \, \sqrt{2} + 4\right)} + 18 \, \sqrt{35}\right)} {\lambda}^{4} + 7 \, \sqrt{715} \pi {\beta} {\lambda}^{2}\right)} \sqrt{{\beta}}\right)}}{15015 \, {\beta}^{{5}/{2}}}
+$$
+
+
+
+\begin{table}[H] 
+  \centering
+% \scriptsize %   \small
+  %  \resizebox{\textwidth}{!}
+      {
+  \begin{tabular}{|ll|ll|} % {\textwidth}{|XX|XX|}
+ \hline
+ \multicolumn{2}{|l}{
+def mu(x,λ,β): return λ
+}
+  & \multicolumn{2}{l|}{\# Intensity}   
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+G = [[1,2],[2,3]]
+}
+  & \multicolumn{2}{l|}{\# Three-hop graph} 
+ \\
+ \hline
+ \multicolumn{2}{|l}{
+ E=[[1]]
+} 
+ & \multicolumn{2}{l|}{\# Single endpoint}   
+ \\
+\hline
+\hline
+\multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{c|}{Computed quantity} & \multicolumn{1}{c|}{Output} & \multicolumn{1}{c|}{Partitions} 
+ \\ 
+ \hline
+\multicolumn{1}{|c|}{c(1,1,G,E,mu,H)} & \multicolumn{1}{c|}{First cumulant} & \multicolumn{1}{c|}{${\lambda}^{3} \sqrt{\frac{\pi^{3}}{{\beta}^{3}}}$} & \multicolumn{1}{c|}{1} 
+\\ % [1ex]
+\hline
+\end{tabular}
+}
+    % \caption{Summary of branching tree notation.}
+\end{table} 
+
+\vspace{-0.6cm}
+
+\section{Three-hop counts}
+\label{appl-engineer}
+\noindent
+ Let $o$ denote the origin in $\R$. 
+ Take $x>0$, denote $N(0,x)$ the number of $3$-hops connecting the origin
+ to $x$ in $\Gamma(\eta_{o,x})$ on $\R$, i.e. 
+\begin{equation}
+  \label{3hop-1}
+N(0,x):=\sum_{x_1\ne x_2\in\eta}\bone_{\{o\leftrightarrow x_1\}}\bone_{\{x_1\leftrightarrow x_2\}}\bone_{\{x_2\leftrightarrow x\}}.
+\end{equation}
+The moments and cumulants of $N(0,x)$ are accessible, see \cite{prkhp} for more details. 
+ Denote $N_3$ the number of points containing in at least one $3$-hop connecting  to the origin $o$ in $\Gamma(\eta_0 )$, i.e.
+\begin{equation}
+\nonumber
+ N_3:=\sum_{x\in\eta}\bone_{\{o\overset{k}{\leftrightarrow}x~\text{in}~\Gamma(\eta_o)\}}. 
+\end{equation}
+ By virtue of the Mecke equation \cite{LastPenrose17}, we rely on the void probability of $N(0,x)$ to obtain the expectation $\E [ N_3 ]$, 
+\begin{eqnarray}
+\E [ N_3 ] &=&\lambda\int_{\R_+}\IP\left(o\overset{k}{\leftrightarrow}x~\text{in}~\Gamma(\eta_{0,x})\right)\mathrm{d}x\nonumber\\
+&=&\lambda\int_{\R_+}\IP\left(N(0,x)\geq 1\right)\mathrm{d}x\nonumber\\
+&=&\lambda\int_{\R_+}\large(1-\IP\left(N(0,x)=0\right)\large)\mathrm{d}x.\label{voidprob1}
+\end{eqnarray}
+ Since we know about the moments and cumulants of $N(0,x)$, we may obtain the void probability via the inversion formula for characteristic functions of discrete random variables, c.f. \cite[Page.~511]{feller},
+$$ 
+\IP(X=0) = \frac1{2\pi}\int_{-\pi}^{\pi}\varphi_X(t)\mathrm{d}t 
+= \frac1{2\pi}\int_{-\pi}^\pi\exp\left(
+\sum_{k=1}^\infty\frac{\gamma_k}{k!}(it)^k\right)
+ \mathrm{d}t,
+$$ 
+where $\varphi_X$ is the characteristic function of integer-valued random variable $X$ and $\gamma_k$ stands for the $k$-th cumulant of $X$, $k\geq 1$. Alternatively, according to \cite[Corollary~1.13]{bollobas98} we have
+\begin{equation}
+\nonumber
+  \IP(X=0)=\sum_{k=0}^{\infty}(-1)^k \frac{m_k(X)}{k!},
+\end{equation}
+where $m_k(X)$ is the $k$-th factorial moment of random variable $X$.
+
+Or if $\lambda$ is large enough, we can approximate the void probability in \eqref{voidprob1} by discretised normal distribution, i.e.
+\begin{equation}
+\nonumber
+  \IP(N(0,x)=0)\approx \Phi\left(\frac1{2\sigma}-\mu\right)-\Phi\left(-\frac1{2\sigma}-\mu\right),
+\end{equation}
+where $\Phi$ is the cumulative distribution of standard normal distribution and $\mu, \sigma^2$ are the mean and variance of $N(0,x)$.
+ Replacing $N$ with $N(0,x)$ in \eqref{3hop-1}, we have 
+\begin{eqnarray*}
+  \kappa_n(N(0,x))=\sum_{\substack{\rho\in\Pi_{\widehat{1}}[n\times 2]
+      \\
+\rho\wedge\pi=\widehat{0}}}\int_{\R^{|\rho|}}W^{(0,x)}_\rho (\mathbf{x})\lambda^{|\rho|}\mathrm{d}\mathbf{x},
+\end{eqnarray*}
+where 
+\begin{equation}
+\nonumber
+  W^{(0,x)}_\rho (x_1, \ldots ,x_{|\rho|}):=\left(\prod_{\{o,u\}\in E_2(\rho_G)}H(0,x_u)\right)\left(\prod_{\{u,v\}\in E_1(\rho_G)}H(x_u,x_v)\right)\left(\prod_{\{x,u\}\in E_2(\rho_G)}H(x_u,x)\right).
+\end{equation}
+
+\vspace{-0.3cm}
+
+\begin{figure}[H]
+\captionsetup[subfigure]{font=footnotesize}
+\centering
+\subcaptionbox{connected partition diagram $\Gamma(\rho,\pi)$.}[.5\textwidth]{%
+\begin{tikzpicture}
+\draw[black, thick] (0,0) rectangle (5,6);
+\node[anchor=east,font=\small] at (0.8,5) {1};
+\node[anchor=east,font=\small] at (0.8,4) {2};
+\node[anchor=east,font=\small] at (0.8,3) {3};
+\node[anchor=east,font=\small] at (0.8,2) {4};
+\node[anchor=east,font=\small] at (0.8,1) {5};
+
+\node[anchor=south,font=\small] at (1,0) {o};
+\node[anchor=south,font=\small] at (2,0) {1};
+\node[anchor=south,font=\small] at (3,0) {2};
+\node[anchor=south,font=\small] at (4,0) {x};
+
+\filldraw [gray] (2,1) circle (2pt);
+\filldraw [gray] (3,1) circle (2pt);
+\filldraw [gray] (2,2) circle (2pt);
+\filldraw [gray] (3,2) circle (2pt);
+\filldraw [gray] (1,3) circle (2pt);
+\filldraw [gray] (2,3) circle (2pt);
+\filldraw [gray] (3,3) circle (2pt);
+\filldraw [gray] (4,3) circle (2pt);
+\filldraw [gray] (2,3) circle (2pt);
+\filldraw [gray] (2,4) circle (2pt);
+\filldraw [gray] (3,4) circle (2pt);
+\filldraw [gray] (2,5) circle (2pt);
+\filldraw [gray] (3,5) circle (2pt);
+\foreach \i in {1,...,5}
+         {
+\draw[thick, dash dot,blue] (1,3) .. controls (1.5,\i-.5) .. (2,\i);
+\draw[thick, dash dot,blue] (4,3) .. controls (3.5,\i-.5) .. (3,\i);
+\draw[thick, dash dot,blue] (2,\i) .. controls (2.5,\i-.5) .. (3,\i);
+} 
+
+\draw[thick] (2,5) -- (2,4) -- (2,3);
+\draw[thick] (3,3) -- (2,2) -- (2,1);
+
+\end{tikzpicture}}%
+\subcaptionbox{Diagram $\rho_G$ with $E_1$ in blue, $E_2$ in red.}[.5\textwidth]{
+\begin{tikzpicture}
+\draw[black, thick] (0,0) rectangle (5,6);
+\node[anchor=east,font=\small] at (0.8,5) {1};
+\node[anchor=east,font=\small] at (0.8,4) {2};
+\node[anchor=east,font=\small] at (0.8,3) {3};
+\node[anchor=east,font=\small] at (0.8,2) {4};
+\node[anchor=east,font=\small] at (0.8,1) {5};
+
+\node[anchor=south,font=\small] at (1,0) {o};
+\node[anchor=south,font=\small] at (2,0) {1};
+\node[anchor=south,font=\small] at (3,0) {2};
+\node[anchor=south,font=\small] at (4,0) {x};
+
+\filldraw [gray] (2,1) circle (2pt);
+\filldraw [gray] (3,1) circle (2pt);
+\filldraw [gray] (2,2) circle (2pt);
+\filldraw [gray] (3,2) circle (2pt);
+\filldraw [gray] (1,3) circle (2pt);
+\filldraw [gray] (2,3) circle (2pt);
+\filldraw [gray] (3,3) circle (2pt);
+\filldraw [gray] (4,3) circle (2pt);
+\filldraw [gray] (2,3) circle (2pt);
+\filldraw [gray] (2,4) circle (2pt);
+\filldraw [gray] (3,4) circle (2pt);
+\filldraw [gray] (2,5) circle (2pt);
+\filldraw [gray] (3,5) circle (2pt);
+\draw[thick, dash dot,red] (1,3) .. controls (1.5,3.5) .. (2,4);
+\draw[thick, dash dot,red] (1,3) .. controls (1.5,2.5) .. (2,2);
+\foreach \i in {1,...,5}
+         {
+\draw[thick, dash dot,red] (4,3) .. controls (3.5,\i-.5) .. (3,\i);
+\draw[thick, dash dot,blue] (2,\i) .. controls (2.5,\i-.5) .. (3,\i);
+} 
+
+\draw[thick] (2,5) -- (2,4) -- (2,3);
+\draw[thick] (3,3) -- (2,2) -- (2,1);\end{tikzpicture}}%
+\caption{A example of partition diagram $\Gamma(\rho,\pi)$ and $\rho_G$ with $n=5$, $r=2$.}
+\label{fig:diagram0}
+\end{figure}
+
+\vspace{1.4cm}
+
+For any $i=1, \ldots ,r$, let 
+\begin{equation}\label{neighborhood1}
+  V_i :=\{j\in [r] \ : \ v_i\sim v_j~\mathrm{in}~G\}
+  \quad
+  \mbox{and}
+  \quad
+  E_i :=\left\{j\in [m] \ : \ v_i\sim e_j ~\mathrm{in}~G\right\}. 
+\end{equation}
+
+Similarly to \eqref{merge1}, we let 
+\begin{equation}
+\nonumber
+    G_\rho(y_1, \ldots ,y_{|\rho|}):=\prod_{i=1}^nf(y_{i,1}, \ldots ,y_{i,r}),
+  \qquad \rho=\{\rho_1, \ldots ,\rho_h\}\in \Pi [n\times r], 
+\end{equation}
+and define the function $F$ from $\bigcup_{n=1}^{\infty}\Pi[n\times r]$ to $\R$
+as 
+\begin{equation}
+  \nonumber
+  F(\rho):=\lambda^{|\rho|}\int_{(\R^d)^{|\rho|}}\E\left[ G_\rho(\mathbf{y})\right]\mathrm{d}\mathbf{y},
+  \qquad
+ \rho\in \Pi [n\times r].
+\end{equation}
+\begin{prop}
+ The cumulants of $N_G$ admit the following expression:  
+ \begin{equation}
+\nonumber % \label{connectedcumulant}
+   \kappa_n(N_G)=\sum_{\substack{\sigma\in\Pi_{\widehat{1}}[n\times r]
+       \\\sigma\wedge\pi=\widehat{0}}}F(\sigma),
+  \qquad n\geq 1.
+\end{equation}
+\end{prop}
+
+
+, and denote by
+\begin{equation}
+\nonumber
+  D_i:=|B_i^{[r]}|+|B_i^{[m]}|,
+\end{equation}
+the degree of vertex $v_i$,
+$i=1,\ldots , r+m$. Let also 
+\begin{equation}\label{maxdegree1}
+  M^{[r]}:=\max_{i=1,\ldots , r}
+  |B_i^{[r]}|,
+  \qquad
+  M^{[m]}:=\max_{i=1,\ldots , r} |B_i^{[m]}|,
+\end{equation}
+denote the maximal in-degree and out-degree of the vertices $v_1, \ldots ,v_r$, and $\widebar{m}:=\min_{i=1,\ldots , r} |B_i^{[m]}|$, their smallest out-degree. 
+
+
+\def\cprime{$'$} \def\polhk#1{\setbox0=\hbox{#1}{\ooalign{\hidewidth
+  \lower1.5ex\hbox{`}\hidewidth\crcr\unhbox0}}}
+  \def\polhk#1{\setbox0=\hbox{#1}{\ooalign{\hidewidth
+  \lower1.5ex\hbox{`}\hidewidth\crcr\unhbox0}}} \def\cprime{$'$}
+\begin{thebibliography}{BRSW17}
+
+%\bibitem[BKR89]{BKR}
+%A.D. Barbour, M.~Karo{\'n}ski, and A.~Ruci{\'n}ski.
+%\newblock A central limit theorem for decomposable random variables with
+%  applications to random graphs.
+%\newblock {\em J. Combin. Theory Ser. B}, 47(2):125--145, 1989.
+%
+%\bibitem[BRSW17]{bogdan}
+%K.~Bogdan, J.~Rosi\'{n}ski, G.~Serafin, and L.~Wojciechowski.
+%\newblock L\'{e}vy systems and moment formulas for mixed {P}oisson integrals.
+%\newblock In {\em Stochastic analysis and related topics}, volume~72 of {\em
+%  Progr. Probab.}, pages 139--164. Birkh{\"{a}}user/Springer, Cham, 2017.
+%
+\bibitem[Bol98]{bollobas98} B. Bollob\'as. Random graphs. In Modern graph theory (pp. 215-252). Springer, New York, NY, 1998.
+%\bibitem[CT22]{can2022}
+%V.~H. Can and K.~D. Trinh.
+%\newblock Random connection models in the thermodynamic regime: central limit
+%  theorems for add-one cost stabilizing functionals.
+%\newblock {\em Electron. J. Probab.}, 27:1--40, 2022.
+%
+\bibitem[DE13]{doring}
+H.~D{\"{o}}ring and P.~Eichelsbacher.
+\newblock Moderate deviations via cumulants.
+\newblock {\em J. Theoret. Probab.}, 26:360--385, 2013.
+
+\bibitem[DJS22]{doering}
+H.~D{\"o}ring, S.~Jansen, and K.~Schubert.
+\newblock The method of cumulants for the normal approximation.
+\newblock {\em Probab. Surv.}, 19:185--270, 2022.
+
+%\bibitem[ER59]{ER}
+%P.~Erd{\Horig{o}}s and A.~R\'enyi.
+%\newblock On random graphs. {I}.
+%\newblock {\em Publ. Math. Debrecen}, 6:290--297, 1959.
+%
+%\bibitem[ET14]{eichelsbacher}
+%P.~Eichelsbacher and C.~Th{\"a}le.
+%\newblock New {B}erry-{E}sseen bounds for non-linear functionals of {P}oisson
+%  random measures.
+%\newblock {\em Electron. J. Probab.}, 19:no. 102, 25, 2014.
+%
+\bibitem[Feller71]{feller}
+W.~Feller.
+\newblock An introduction to probability theory and its applications, vol 2. 
+\newblock {\em John Wiley \& Sons}, 1971.
+%\bibitem[Gil59]{G}
+%E.N. Gilbert.
+%\newblock Random graphs.
+%\newblock {\em Ann. Math. Statist}, 30(4):1141--1144, 1959.
+%
+%\bibitem[GT18a]{grotethale18}
+%J.~Grote and C.~Th{\"a}le.
+%\newblock Concentration and moderate deviations for {P}oisson polytopes and
+%  polyhedra.
+%\newblock {\em Bernoulli}, 24:2811--2841, 2018.
+%
+%\bibitem[GT18b]{thale18}
+%J.~Grote and C.~Th{\"a}le.
+%\newblock Gaussian polytopes: a cumulant-based approach.
+%\newblock {\em J. Complexity}, 47:1--41, 2018.
+%
+%\bibitem[Kho08]{khorunzhiy}
+%O.~Khorunzhiy.
+%\newblock On connected diagrams and cumulants of {E}rd{\Horig{o}}s-{R}\'enyi
+%  matrix models.
+%\newblock {\em Comm. Math. Phys.}, 282:209--238, 2008.
+%
+%\bibitem[KRT17]{reichenbachsAoP}
+%K.~Krokowski, A.~Reichenbachs, and C.~Th{\"a}le.
+%\newblock Discrete {M}alliavin-{S}tein method: {B}erry-{E}sseen bounds for
+%  random graphs and percolation.
+%\newblock {\em Ann. Probab.}, 45(2):1071--1109, 2017.
+%
+%\bibitem[LNS21]{LNS21}
+%G.~Last, F.~Nestmann, and M.~Schulte.
+%\newblock The random connection model and functions of edge-marked {P}oisson
+%  processes: second order properties and normal approximation.
+%\newblock {\em Ann. Appl. Probab.}, 31(1):128--168, 2021.
+%
+\bibitem[LP17]{LastPenrose17}
+G.~Last and M.D. Penrose.
+\newblock {\em Lectures on the {P}oisson process}, volume~7 of {\em Institute
+  of Mathematical Statistics Textbooks}.
+\newblock Cambridge University Press, Cambridge, 2017.
+%
+%\bibitem[LRR16]{lachieze-rey}
+%R.~Lachi\`eze-Rey and M.~Reitzner.
+%\newblock {$U$}-statistics in stochastic geometry.
+%\newblock In G.~Peccati and M.~Reitzner, editors, {\em Stochastic Analysis for
+%  {P}oisson Point Processes: {M}alliavin Calculus, {W}iener-{I}t{\^o} Chaos
+%  Expansions and Stochastic Geometry}, volume~7 of {\em Bocconi \& Springer
+%  Series}, pages 229--253. Springer, Berlin, 2016.
+%
+\bibitem[LP22]{LiuPrivault}
+Q.~Liu and N.~Privault.
+\newblock Normal approximation of subgraph counts in the random-connection model.
+\newblock Preprint arXiv:2301.12145, 26 pages, 2023.
+%\bibitem[MM91]{MalyshevMinlos91}
+%V.A. Malyshev and R.A. Minlos.
+%\newblock {\em Gibbs random fields}, volume~44 of {\em Mathematics and its
+%  Applications (Soviet Series)}.
+%\newblock Kluwer Academic Publishers Group, Dordrecht, 1991.
+%
+%\bibitem[Pri12]{momentpoi}
+%N.~Privault.
+%\newblock Moments of {P}oisson stochastic integrals with random integrands.
+%\newblock {\em Probab. Math. Statist.}, 32(2):227--239, 2012.
+%
+\bibitem[Pri19]{prkhp}
+N.~Privault.
+\newblock Moments of $k$-hop counts in the random-connection model.
+\newblock {\em J. Appl. Probab.}, 56(4):1106--1121, 2019.
+%
+\bibitem[Pri22]{privaultkhops}
+N.~Privault.
+\newblock Asymptotic analysis of $k$-hop connectivity in the 1{D} unit disk
+  random graph model.
+\newblock Preprint arXiv:2203.14535, 40 pages, 2022.
+%
+%\bibitem[PS20]{PS2}
+%N.~Privault and G.~Serafin.
+%\newblock Normal approximation for sums of discrete {$U$}-statistics -
+%  application to {K}olmogorov bounds in random subgraph counting.
+%\newblock {\em Bernoulli}, 26(1):587--615, 2020.
+%
+%\bibitem[PS22]{PS4}
+%N.~Privault and G.~Serafin.
+%\newblock Berry-{E}sseen bounds for functionals of independent random
+%  variables.
+%\newblock {\em Electron. J. Probab.}, 27:1--37, 2022.
+%
+%\bibitem[PT11]{peccatitaqqu}
+%G.~Peccati and M.~Taqqu.
+%\newblock {\em Wiener Chaos: Moments, Cumulants and Diagrams: A survey with
+%  Computer Implementation}.
+%\newblock Bocconi \& Springer Series. Springer, 2011.
+%
+%\bibitem[R{\"o}l22]{roellin2}
+%A.~R{\"o}llin.
+%\newblock Kolmogorov bounds for the normal approximation of the number of
+%  triangles in the {E}rd{\Horig{o}}s-{R}\'enyi random graph.
+%\newblock {\em Probab. Engrg. Inform. Sci.},
+%  36(3):747--773, 2022.
+%
+%\bibitem[RSS78]{rudzkis}
+%R.~Rudzkis, L.~Saulis, and V.A. Statuljavi\v{c}us.
+%\newblock A general lemma on probabilities of large deviations.
+%\newblock {\em Litovsk. Mat. Sb.}, 18(2):99--116, 217, 1978.
+%
+%\bibitem[Ruc88]{rucinski}
+%A.~Ruci{\'n}ski.
+%\newblock When are small subgraphs of a random graph normally distributed?
+%\newblock {\em Probab. Theory Related Fields}, 78:1--10, 1988.
+%
+\bibitem[SS91]{saulis}
+L.~Saulis and V.A. Statulevi\v{c}ius.
+\newblock {\em Limit theorems for large deviations}, volume~73 of {\em
+  Mathematics and its Applications (Soviet Series)}.
+\newblock Kluwer Academic Publishers Group, Dordrecht, 1991.
+\newblock Translated and revised from the 1989 Russian original.
+
+\end{thebibliography}
